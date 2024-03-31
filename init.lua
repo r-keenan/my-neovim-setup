@@ -128,6 +128,10 @@ vim.opt.undofile = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
+-- Check for spelling errors
+vim.opt.spelllang = 'en_us'
+vim.opt.spell = true
+
 -- Keep signcolumn on by default
 vim.opt.signcolumn = 'yes'
 
