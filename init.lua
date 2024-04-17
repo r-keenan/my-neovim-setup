@@ -161,6 +161,11 @@ vim.opt.cursorline = true
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
 
+-- Get rid of unreadable text for variable name when a variable name is currently not used.
+vim.diagnostic.config {
+  underline = false,
+}
+
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
