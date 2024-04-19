@@ -1,5 +1,3 @@
--- File: lua/custom/plugins/vim-tmux-navigator.lua
-
 return {
   'christoomey/vim-tmux-navigator',
   cmd = {
