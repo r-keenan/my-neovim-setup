@@ -90,6 +90,7 @@ P.S. You can delete this when you're done too. It's your config now! :)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+vim.g.python3_host_prog = 'venv/lib/python3.12/site-packages'
 -- Set to true if you have a Nerd Font installed
 vim.g.have_nerd_font = true
 
@@ -678,6 +679,8 @@ require('lazy').setup({
         python = { 'isort', 'black' },
         go = { 'gofmt' },
         csharp = { 'csharpier' },
+        vue = { { 'prettierd', 'prettier' } },
+
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
