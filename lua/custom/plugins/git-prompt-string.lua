@@ -1,5 +1,5 @@
-return {
-  'mikesmithgh/git-prompt-string-lualine.nvim',
-  enabled = true,
-  lazy = true,
-}
+--return {
+--  'mikesmithgh/git-prompt-string-lualine.nvim',
+--  enabled = true,
+--  lazy = true,
+--}
