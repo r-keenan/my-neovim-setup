@@ -65,7 +65,6 @@ return {
           { 'fileformat' },
           { 'filetype' },
         },
-        lualine_b = { 'git_prompt_string', 'diff', 'diagnostics' },
       },
     }
   end,
