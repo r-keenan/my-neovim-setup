@@ -208,8 +208,8 @@ vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower win
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
 -- Split windows vertically
-vim.keymap.set('n', '<leader>sv', '<C-w>v') -- split window vertically
-vim.keymap.set('n', '<leader>sh', '<C-w>s') -- split window horizontally
+vim.keymap.set('n', '<leader>sy', '<C-w>v', { desc = '[S]plit Window on [y]-axis/Vertically' }) -- split window vertically
+vim.keymap.set('n', '<leader>sx', '<C-w>s', { desc = '[S]plit Window on [x]-axis/horizontally' }) -- split window horizontally
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
