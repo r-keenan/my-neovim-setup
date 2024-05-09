@@ -174,6 +174,9 @@ vim.diagnostic.config {
 vim.opt.hlsearch = true
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
+-- Adding keymap for toggling close toggletermina. this command is used to exit from terminal mode into normal mode.l
+vim.keymap.set('t', '<leader>tt', '<C-\\><C-n>:CFloatTerm<CR>', { noremap = true, silent = true })
+
 -- Use 'j + j' to exit Insert mode instead of Esc key
 local options = { noremap = true }
 vim.keymap.set('i', 'jj', '<Esc>', options)
