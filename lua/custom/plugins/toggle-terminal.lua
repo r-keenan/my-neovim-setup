@@ -9,9 +9,9 @@ return {
       autochdir = true,
       start_in_insert = true,
       close_on_exit = true,
-      size = 5,
+      size = 10,
       float_ops = {
-        height = 5,
+        height = 10,
       },
     }
   end,
