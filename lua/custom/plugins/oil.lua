@@ -36,6 +36,10 @@ return {
           -- Whether the preview window is automatically updated when the cursor is moved
           update_on_cursor_moved = true,
         },
+        -- Configuration for the floating keymaps help window
+        keymaps_help = {
+          border = 'rounded',
+        },
       }
 
       -- Open parent directory in current window
