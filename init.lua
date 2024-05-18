@@ -714,11 +714,7 @@ require('lazy').setup({
           -- `friendly-snippets` contains a variety of premade snippets.
           --    See the README about individual language/framework/plugin snippets:
           --    https://github.com/rafamadriz/friendly-snippets
-          --{
-          -- config = function()
-          -- require('luasnip.loaders.from_vscode').lazy_load()
-          -- end,
-          --},
+          'rafamadriz/friendly-snippets',
         },
       },
       'saadparwaiz1/cmp_luasnip',
@@ -734,6 +730,7 @@ require('lazy').setup({
       -- See `:help cmp`
       local cmp = require 'cmp'
       local luasnip = require 'luasnip'
+      require('luasnip.loaders.from_vscode').lazy_load()
       luasnip.config.setup {}
 
       cmp.setup {
