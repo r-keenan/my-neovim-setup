@@ -211,7 +211,7 @@ vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower win
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
 -- Split windows vertically
-vim.keymap.set('n', '<leader>sy', '<C-w>v', { desc = '[S]plit Window on [y]-axis/Vertically' })   -- split window vertically
+vim.keymap.set('n', '<leader>sy', '<C-w>v', { desc = '[S]plit Window on [y]-axis/Vertically' }) -- split window vertically
 vim.keymap.set('n', '<leader>sx', '<C-w>s', { desc = '[S]plit Window on [x]-axis/horizontally' }) -- split window horizontally
 
 -- [[ Basic Autocommands ]]
@@ -262,7 +262,7 @@ require('lazy').setup({
   --    require('Comment').setup({})
 
   -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim',    opts = {} },
+  { 'numToStr/Comment.nvim', opts = {} },
 
   -- Here is a more advanced example where we pass configuration
   -- options to `gitsigns.nvim`. This is equivalent to the following lua:
@@ -297,7 +297,7 @@ require('lazy').setup({
   -- after the plugin has been loaded:
   --  config = function() ... end
 
-  {                     -- Useful plugin to show you pending keybinds.
+  { -- Useful plugin to show you pending keybinds.
     'folke/which-key.nvim',
     event = 'VimEnter', -- Sets the loading event to 'VimEnter'
     config = function() -- This is the function that runs, AFTER loading
@@ -343,7 +343,7 @@ require('lazy').setup({
       { 'nvim-telescope/telescope-ui-select.nvim' },
 
       -- Useful for getting pretty icons, but requires a Nerd Font.
-      { 'nvim-tree/nvim-web-devicons',            enabled = vim.g.have_nerd_font },
+      { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
     },
     config = function()
       -- Telescope is a fuzzy finder that comes with a lot of different things that
@@ -628,10 +628,10 @@ require('lazy').setup({
       -- for you, so that they are available from within Neovim.
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
-        'stylua',   -- Used to format lua code
+        'stylua', -- Used to format lua code
         'prettier', -- prettier formatter
-        'isort',    -- python formatter
-        'black',    -- python formatter
+        'isort', -- python formatter
+        'black', -- python formatter
         'prettierd',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
@@ -666,7 +666,7 @@ require('lazy').setup({
         }
       end,
       formatters_by_ft = {
-        --lua = { 'stylua' },
+        lua = { 'stylua' },
         svelte = { { 'prettierd', 'prettier' } },
         javascript = { 'prettier' },
         typescript = { 'prettier' },
@@ -729,7 +729,7 @@ require('lazy').setup({
       -- See `:help cmp`
       local cmp = require 'cmp'
       local luasnip = require 'luasnip'
-      require('luasnip.loaders.from_vscode').lazy_load({ paths = './snippets' })
+      require('luasnip.loaders.from_vscode').lazy_load { paths = './snippets' }
       luasnip.config.setup {}
 
       cmp.setup {
