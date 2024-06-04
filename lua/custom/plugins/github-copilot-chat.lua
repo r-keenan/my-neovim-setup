@@ -3,16 +3,14 @@ return {
     "CopilotC-Nvim/CopilotChat.nvim",
     branch = "canary",
     dependencies = {
-      { "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
-      { "nvim-lua/plenary.nvim" },  -- for curl, log wrapper
+      { "zbirenbaum/copilot.lua" },
+      { "nvim-lua/plenary.nvim" },
     },
     opts = {
-      debug = true, -- Enable debugging
-      -- See Configuration section for rest
+      debug = true,
     },
     keys = {
       { "<leader>ct", "<cmd>CopilotChatToggle<cr>", desc = "CopilotChat - Toggle" }
     },
-    -- See Commands section for default commands if you want to lazy load on them
   },
 }
