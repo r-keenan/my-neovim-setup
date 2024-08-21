@@ -10,8 +10,9 @@ return {
     require('neo-tree').setup {
       filesystem = {
         filtered_items = {
-          visible = true, -- when true, they will just be displayed differently than normal items
+          visible = false, -- when true, they will just be displayed differently than normal items
           hide_dotfiles = false,
+          enable_git_status = true,
           hide_hidden = true,
           hide_gitignored = false,
           always_show = { -- remains visible even if other settings would normally hide it
