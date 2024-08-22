@@ -641,6 +641,7 @@ require('lazy').setup({
         'pyright',
         'google-java-format',
         'eslint_d',
+        'yamllint',
         'csharpier',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
