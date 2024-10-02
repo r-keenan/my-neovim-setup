@@ -614,7 +614,6 @@ require('lazy').setup({
         svelte = {},
         ts_ls = {},
         pyright = {},
-        omnisharp = {},
         csharp_ls = {},
         dockerls = {},
         docker_compose_language_service = {},
