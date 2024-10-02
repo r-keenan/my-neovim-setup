@@ -411,6 +411,8 @@ require('lazy').setup({
         defaults = {
           file_ignore_patterns = {
             '.git/',
+            'bin/',
+            'obj/',
           },
         },
         pickers = {
