@@ -31,3 +31,9 @@ json
 toml
 md
 gitignore
+dotnet
+cli
+ItemGroup
+appsettings
+CopyToOutputDirectory
+launchSettings

@@ -145,6 +145,7 @@ vim.opt.timeoutlen = 300
 -- Configure how new splits should be opened
 vim.opt.splitright = true
 vim.opt.splitbelow = true
+vim.opt.tabstop = 2
 
 -- Sets how neovim will display certain whitespace in the editor.
 --  See `:help 'list'`
