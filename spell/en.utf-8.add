@@ -37,3 +37,5 @@ ItemGroup
 appsettings
 CopyToOutputDirectory
 launchSettings
+launchsettings
+async
