@@ -204,9 +204,16 @@ vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right win
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
--- Split windows vertically
-vim.keymap.set('n', '<leader>sy', '<C-w>v', { desc = '[S]plit Window on [y]-axis/Vertically' }) -- split window vertically
-vim.keymap.set('n', '<leader>sx', '<C-w>s', { desc = '[S]plit Window on [x]-axis/horizontally' }) -- split window horizontally
+-- Split windows
+vim.keymap.set('n', '<leader>sy', '<C-w>v', { desc = '[s]plit Window on [y]-axis/Vertically' })
+vim.keymap.set('n', '<leader>sx', '<C-w>s', { desc = '[s]plit Window on [x]-axis/horizontally' })
+
+-- Resize windows
+vim.keymap.set('n', '<leader>se', '<C-w>=', { desc = 'Make [s]plit [e]qual sizes' })
+vim.keymap.set('n', '<A-Up>', ':resize -2<CR>', { silent = true, desc = 'resize horizontally up' })
+vim.keymap.set('n', '<A-Down>', ':resize +2<CR>', { silent = true, desc = 'resize horizontally down' })
+vim.keymap.set('n', '<A-Left>', '<cmd>vertical resize -2<CR>', { silent = true, desc = 'resize vertically decrease' })
+vim.keymap.set('n', '<A-Right>', '<cmd>vertical resize +2<CR>', { silent = true, desc = 'resize vertically increase' })
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
