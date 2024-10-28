@@ -793,7 +793,7 @@ require('lazy').setup({
             luasnip.lsp_expand(args.body)
           end,
         },
-        completion = { completeopt = 'menu,menuone,noinsert' },
+        completion = { completeopt = 'menu,menuone,noinsert', keyword_length = 2 },
 
         -- For an understanding of why these mappings were
         -- chosen, you will need to read `:help ins-completion`
@@ -842,10 +842,10 @@ require('lazy').setup({
           --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
         },
         sources = {
-          { name = 'nvim_lsp' },
-          { name = 'luasnip' },
-          { name = 'buffer' }, -- text within current buffer
-          { name = 'path' },
+          { name = 'nvim_lsp', max_item_count = 10 },
+          { name = 'luasnip', max_item_count = 5 },
+          { name = 'buffer', max_item_count = 5 }, -- text within current buffer
+          { name = 'path', max_item_count = 5 },
         },
       }
     end,
