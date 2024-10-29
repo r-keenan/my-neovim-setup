@@ -164,7 +164,7 @@ vim.opt.scrolloff = 10
 
 -- Get rid of unreadable text for variable name when a variable name is currently not used.
 vim.diagnostic.config {
-  underline = false,
+  underline = true,
 }
 
 -- [[ Basic Keymaps ]]
