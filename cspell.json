@@ -1,0 +1,23 @@
+{
+  "version": "0.2",
+  "language": "en",
+  "enableFiletypes": ["*"],
+  "dictionaries": [
+    "typescript",
+    "javascript",
+    "html",
+    "css",
+    "node",
+    "python",
+    "csharp",
+    "dotnet",
+    "golang",
+    "java",
+    "php",
+    "rust",
+    "svelte",
+    "vue"
+  ],
+  "ignorePaths": ["node_modules", "dist", "build", "bin", "obj", ".git"],
+  "words": []
+}

@@ -624,7 +624,13 @@ require('lazy').setup({
         csharp_ls = {},
         angularls = {},
         dockerls = {},
-        cspell = {},
+        cspell = {
+          config_file = vim.fn.expand '~/.config/nvim/cspell.json',
+          filetypes = { '*' },
+          diagnostics_postprocess = function(diagnostic)
+            diagnostic.severity = vim.diagnostic.severity.HINT
+          end,
+        },
         docker_compose_language_service = {},
         html = {},
         cssls = {},
