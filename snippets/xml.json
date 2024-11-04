@@ -1,0 +1,44 @@
+{
+  "Static Console Using with Item Group": {
+    "prefix": "scuig",
+    "body": [
+      "<ItemGroup>",
+      "    <Using Include=\"System.Console\" Static=\"true\" />",
+      "</ItemGroup>"
+    ],
+    "description": "Add static Console using to .csproj file"
+  },
+  "Static Console Using": {
+    "prefix": "scu",
+    "body": ["<Using Include=\"System.Console\" Static=\"true\" />"],
+    "description": "Add static Console using to .csproj file"
+  },
+  "Project Reference with Item Group": {
+    "prefix": "projrefig",
+    "body": [
+      "<ItemGroup>",
+      "   <ProjectReference Include=\"\" />",
+      "</ItemGroup>"
+    ],
+    "description": "Add static Console using to .csproj file"
+  },
+  "Project Reference": {
+    "prefix": "projref",
+    "body": ["<ProjectReference Include=\"\" />"],
+    "description": "Add static Console using to .csproj file"
+  },
+  "Package Reference with Item Group": {
+    "prefix": "packrefig",
+    "body": [
+      "<ItemGroup>",
+      "   <PackageReference Include=\"\" Version=\"x.x.x\" />",
+      "</ItemGroup>"
+    ],
+    "description": "Add static Console using to .csproj file"
+  },
+  "Package Reference": {
+    "prefix": "packref",
+    "body": ["<PackageReference Include=\"\" Version=\"x.x.x\" />"],
+    "description": "Add static Console using to .csproj file"
+  }
+}

@@ -688,6 +688,7 @@ require('lazy').setup({
         'yamllint',
         'csharpier',
         'ts_ls',
+        'lemminx',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
@@ -708,6 +709,17 @@ require('lazy').setup({
 
             require('lspconfig').jdtls.setup {
               -- Your custom nvim-java configuration goes here
+            }
+            require('lspconfig').lemminx.setup {
+              filetypes = { 'xml', 'xsd', 'xsl', 'xslt', 'svg', 'csproj' },
+              settings = {
+                xml = {
+                  schemas = {
+                    -- Add MSBuild schema for .csproj files
+                    ['http://schemas.microsoft.com/developer/msbuild/2003'] = '*.csproj',
+                  },
+                },
+              },
             }
           end,
         },
@@ -780,10 +792,17 @@ require('lazy').setup({
           -- 'rafamadriz/friendly-snippets',
           {
             'rafamadriz/friendly-snippets',
-            config = function()
-              require('luasnip.loaders.from_vscode').lazy_load()
-            end,
+config = function()
+            require('luasnip.loaders.from_vscode').lazy_load()
+            require('luasnip.loaders.from_vscode').lazy_load {
+              paths = {
+                vim.fn.stdpath 'config' .. '/snippets',
+              },
+            }
+          end,
           },
+
+          
         },
       },
       'saadparwaiz1/cmp_luasnip',
