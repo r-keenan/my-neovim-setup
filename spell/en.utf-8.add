@@ -40,3 +40,7 @@ launchSettings
 launchsettings
 async
 TODO
+MassTransit
+RabbitMQ
+GCP
+PubSub

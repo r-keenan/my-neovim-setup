@@ -9,6 +9,21 @@ return {
   },
   config = function()
     require('codecompanion').setup {
+      -- Add language mapping for Anthropic responses
+      language_mapping = {
+        ['```csharp'] = 'csharp',
+        ['```lua'] = 'lua',
+        ['```python'] = 'python',
+        ['```javascript'] = 'javascript',
+        ['```typescript'] = 'typescript',
+        ['```json'] = 'json',
+        ['```bash'] = 'bash',
+        ['```html'] = 'html',
+        ['```css'] = 'css',
+        ['```yaml'] = 'yaml',
+        ['```sql'] = 'sql',
+        ['```markdown'] = 'markdown',
+      },
       strategies = {
         chat = {
           adapter = 'anthropic',
