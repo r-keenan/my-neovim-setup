@@ -690,6 +690,7 @@ require('lazy').setup({
         'csharpier',
         'ts_ls',
         'lemminx',
+        'intelephense',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
