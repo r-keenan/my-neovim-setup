@@ -23,6 +23,7 @@ return {
         ['```yaml'] = 'yaml',
         ['```sql'] = 'sql',
         ['```markdown'] = 'markdown',
+        ['```php'] = 'php',
       },
       strategies = {
         chat = {
