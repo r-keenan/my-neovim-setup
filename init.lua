@@ -641,6 +641,7 @@ require('lazy').setup({
         elixirls = {},
         emmet_language_server = {},
         terraformls = {},
+        intelephense = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
         -- Some languages (like typescript) have entire language plugins that can be useful:
@@ -759,12 +760,24 @@ require('lazy').setup({
         csharp = { 'csharpier' },
         vue = { { 'prettierd', 'prettier' } },
         java = { 'google-java-format' },
+        php = { 'php-cs-fixer' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
         -- You can use a sub-list to tell conform to run *until* a formatter
         -- is found.
         -- javascript = { { "prettierd", "prettier" } },
+      },
+      formatters = {
+        ['php-cs-fixer'] = {
+          command = 'php-cs-fixer',
+          args = {
+            'fix',
+            '--rules=@PSR12', -- Formatting preset. Other presets are available, see the php-cs-fixer docs.
+            '$FILENAME',
+          },
+          stdin = false,
+        },
       },
     },
   },
@@ -792,17 +805,15 @@ require('lazy').setup({
           -- 'rafamadriz/friendly-snippets',
           {
             'rafamadriz/friendly-snippets',
-config = function()
-            require('luasnip.loaders.from_vscode').lazy_load()
-            require('luasnip.loaders.from_vscode').lazy_load {
-              paths = {
-                vim.fn.stdpath 'config' .. '/snippets',
-              },
-            }
-          end,
+            config = function()
+              require('luasnip.loaders.from_vscode').lazy_load()
+              require('luasnip.loaders.from_vscode').lazy_load {
+                paths = {
+                  vim.fn.stdpath 'config' .. '/snippets',
+                },
+              }
+            end,
           },
-
-          
         },
       },
       'saadparwaiz1/cmp_luasnip',
