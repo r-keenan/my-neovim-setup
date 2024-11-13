@@ -11,7 +11,7 @@ return {
     require('codecompanion').setup {
       -- Add language mapping for Anthropic responses
       language_mapping = {
-        ['```csharp'] = 'csharp',
+        ['```csharp'] = 'c_sharp',
         ['```lua'] = 'lua',
         ['```python'] = 'python',
         ['```javascript'] = 'javascript',
