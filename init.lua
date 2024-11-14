@@ -691,6 +691,7 @@ require('lazy').setup({
         'ts_ls',
         'lemminx',
         'intelephense',
+        'vimls',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 

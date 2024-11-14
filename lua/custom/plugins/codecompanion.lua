@@ -9,10 +9,19 @@ return {
     { 'stevearc/dressing.nvim', opts = {} }, -- Optional: Improves `vim.ui.select`
   },
   config = function()
+    vim.api.nvim_create_autocmd('FileType', {
+      pattern = 'codecompanion',
+      callback = function()
+        vim.treesitter.start(0, 'markdown')
+      end,
+    })
     require('codecompanion').setup {
       -- Add language mapping for Anthropic responses
       language_mapping = {
+        cs = 'c_sharp',
+        csharp = 'c_sharp',
         ['```csharp'] = 'c_sharp',
+        ['```cs'] = 'c_sharp',
         ['```lua'] = 'lua',
         ['```python'] = 'python',
         ['```javascript'] = 'javascript',
@@ -25,6 +34,11 @@ return {
         ['```sql'] = 'sql',
         ['```markdown'] = 'markdown',
         ['```php'] = 'php',
+      },
+      markdown = {
+        code_block_format = {
+          c_sharp = '```csharp\n%s\n```',
+        },
       },
       strategies = {
         chat = {
