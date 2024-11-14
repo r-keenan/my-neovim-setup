@@ -92,6 +92,11 @@ vim.g.maplocalleader = ' '
 vim.g.python3_host_prog = 'venv/lib/python3.12/site-packages'
 -- Set to true if you have a Nerd Font installed
 vim.g.have_nerd_font = true
+vim.filetype.add {
+  extension = {
+    csharp = 'cs',
+  },
+}
 
 -- [[ Setting options ]]
 -- See `:help vim.opt`

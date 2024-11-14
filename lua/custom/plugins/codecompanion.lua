@@ -17,11 +17,15 @@ return {
     })
     require('codecompanion').setup {
       -- Add language mapping for Anthropic responses
+      language_servers = {
+        omnisharp = true,
+      },
+      filetypes = {
+        'cs',
+        'csharp',
+      },
       language_mapping = {
-        cs = 'c_sharp',
-        csharp = 'c_sharp',
-        ['```csharp'] = 'c_sharp',
-        ['```cs'] = 'c_sharp',
+        --['```csharp'] = 'cs',
         ['```lua'] = 'lua',
         ['```python'] = 'python',
         ['```javascript'] = 'javascript',
