@@ -2,6 +2,12 @@ return {
   'folke/noice.nvim',
   event = 'VeryLazy',
   opts = {
+    messages = {
+      enabled = false,
+    },
+    notify = {
+      enabled = false,
+    },
     -- add any options here
   },
   dependencies = {
