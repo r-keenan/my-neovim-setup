@@ -95,6 +95,7 @@ vim.g.have_nerd_font = true
 vim.filetype.add {
   extension = {
     csharp = 'cs',
+    csproj = 'xml',
   },
 }
 
