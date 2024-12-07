@@ -427,6 +427,10 @@ require('lazy').setup({
             'bin/',
             'obj/',
           },
+          path_display = {
+            'smart',
+            'absolute',
+          },
         },
         pickers = {
           find_files = {
