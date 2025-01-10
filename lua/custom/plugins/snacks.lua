@@ -109,7 +109,7 @@ return {
       desc = 'Dismiss All Notifications',
     },
     {
-      '<c-/>',
+      '<leader>tt',
       function()
         Snacks.terminal()
       end,
