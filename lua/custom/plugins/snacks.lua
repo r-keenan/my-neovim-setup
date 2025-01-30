@@ -17,6 +17,13 @@ return {
     quickfile = { enabled = true },
     scroll = { enabled = true },
     statuscolumn = { enabled = true },
+    terminal = {
+      win = {
+        wo = {
+          winbar = '',
+        },
+      },
+    },
     words = { enabled = true },
     styles = {
       notification = {
