@@ -652,6 +652,7 @@ require('lazy').setup({
         emmet_language_server = {},
         terraformls = {},
         intelephense = {},
+        htmx = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
         -- Some languages (like typescript) have entire language plugins that can be useful:
@@ -723,6 +724,7 @@ require('lazy').setup({
             require('lspconfig').jdtls.setup {
               -- Your custom nvim-java configuration goes here
             }
+            require('lspconfig').htmx.setup {}
             require('lspconfig').lemminx.setup {
               filetypes = { 'xml', 'xsd', 'xsl', 'xslt', 'svg', 'csproj' },
               settings = {
