@@ -211,8 +211,12 @@ vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower win
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
 -- Split windows
-vim.keymap.set('n', '<leader>sy', '<C-w>v', { desc = '[s]plit Window on [y]-axis/Vertically' })
-vim.keymap.set('n', '<leader>sx', '<C-w>s', { desc = '[s]plit Window on [x]-axis/horizontally' })
+-- Split Left
+vim.keymap.set('n', '<leader>sl', ':leftabove vsplit<CR>', { noremap = true, silent = true })
+-- Split Right
+vim.keymap.set('n', '<leader>sr', '<C-w>v', { desc = '[s]plit Window on [y]-axis/Vertically' })
+-- Split Down
+vim.keymap.set('n', '<leader>sd', '<C-w>s', { desc = '[s]plit Window on [x]-axis/horizontally' })
 
 -- Resize windows
 vim.keymap.set('n', '<leader>se', '<C-w>=', { desc = 'Make [s]plit [e]qual sizes' })
@@ -458,8 +462,8 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
       vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
       vim.keymap.set('n', '<leader>gb', builtin.git_branches, { desc = 'Show all [G]it [B]ranches' })
-      vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
-      vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
+      vim.keymap.set('n', '<leader>dd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
+      vim.keymap.set('n', '<leader>rs', builtin.resume, { desc = '[S]earch [R]esume' })
       vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
       vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
 
