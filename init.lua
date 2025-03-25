@@ -708,7 +708,6 @@ require('lazy').setup({
         svelte = {},
         ts_ls = {},
         pyright = {},
-        omnisharp = {},
         angularls = {},
         dockerls = {},
         cspell = {

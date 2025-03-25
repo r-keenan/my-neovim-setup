@@ -17,9 +17,6 @@ return {
     })
     require('codecompanion').setup {
       -- Add language mapping for Anthropic responses
-      language_servers = {
-        omnisharp = true,
-      },
       filetypes = {
         'cs',
         'csharp',
@@ -52,6 +49,9 @@ return {
           adapter = 'anthropic',
         },
         agent = {
+          adapter = 'anthropic',
+        },
+        cmd = {
           adapter = 'anthropic',
         },
       },
