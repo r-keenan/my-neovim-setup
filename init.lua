@@ -722,7 +722,6 @@ require('lazy').setup({
         html = {},
         cssls = {},
         graphql = {},
-        emmet_ls = {},
         prismals = {},
         tailwindcss = {},
         elixirls = {},
