@@ -224,15 +224,15 @@ return {
           branch,
           space,
           diff,
-          git_blame,
           space,
+          location,
         },
         lualine_x = {
           space,
         },
         lualine_y = { macro, space },
         lualine_z = {
-          location,
+          git_blame,
           dia,
           lsp,
         },
