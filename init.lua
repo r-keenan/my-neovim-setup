@@ -99,6 +99,10 @@ vim.filetype.add {
   },
 }
 
+-- Disable inline git blame display
+vim.g.gitblame_display_virtual_text = 0 -- Disables the inline display
+vim.g.gitblame_enabled = 1 -- Keep the plugin enabled for lualine
+
 -- [[ Setting options ]]
 -- See `:help vim.opt`
 -- NOTE: You can change these options as you wish!

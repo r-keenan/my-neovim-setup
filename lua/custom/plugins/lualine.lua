@@ -1,11 +1,26 @@
 return {
   'nvim-lualine/lualine.nvim',
-  dependencies = { 'nvim-tree/nvim-web-devicons', 'dgox16/oldworld.nvim', 'folke/noice.nvim' },
+  dependencies = { 'nvim-tree/nvim-web-devicons', 'dgox16/oldworld.nvim', 'folke/noice.nvim', 'f-person/git-blame.nvim' },
   config = function()
     local lualine = require 'lualine'
     local lazy_status = require 'lazy.status' -- to configure lazy pending updates count
 
     local colors = require 'oldworld.palette'
+
+    local git_blame = {
+      function()
+        -- Check if git-blame is available and enabled
+        local ok, git_blame = pcall(require, 'gitblame')
+        if not ok then
+          return ''
+        end
+
+        local blame = git_blame.get_current_blame_text()
+        return blame ~= nil and blame ~= '' and '  ' .. blame or ''
+      end,
+      color = { bg = colors.gray02, fg = colors.blue, gui = 'italic' },
+      separator = { left = '', right = '' },
+    }
 
     local modecolor = {
       n = colors.red,
@@ -207,15 +222,17 @@ return {
           filetype,
           space,
           branch,
-          diff,
           space,
-          location,
+          diff,
+          git_blame,
+          space,
         },
         lualine_x = {
           space,
         },
         lualine_y = { macro, space },
         lualine_z = {
+          location,
           dia,
           lsp,
         },
