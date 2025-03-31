@@ -856,7 +856,7 @@ require('lazy').setup({
       end,
       formatters_by_ft = {
         lua = { 'stylua' },
-        svelte = { { 'prettierd', 'prettier' } },
+        svelte = { 'prettierd', 'prettier' },
         javascript = { 'prettier' },
         typescript = { 'prettier' },
         javascriptreact = { 'prettier' },
@@ -870,7 +870,7 @@ require('lazy').setup({
         python = { 'isort', 'black' },
         go = { 'gofmt' },
         csharp = { 'csharpier' },
-        vue = { { 'prettierd', 'prettier' } },
+        vue = { 'prettierd', 'prettier' },
         java = { 'google-java-format' },
         php = { 'php-cs-fixer' },
         -- Conform can also run multiple formatters sequentially
