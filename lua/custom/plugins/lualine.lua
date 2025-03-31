@@ -70,13 +70,6 @@ return {
       separator = { left = '', right = '' },
     }
 
-    local filetype = {
-      'filetype',
-      icons_enabled = false,
-      color = { bg = colors.gray02, fg = colors.blue, gui = 'italic,bold' },
-      separator = { left = '', right = '' },
-    }
-
     local branch = {
       'branch',
       icon = '',
@@ -214,17 +207,12 @@ return {
         lualine_a = {
           modes,
         },
-        lualine_b = {
-          space,
-        },
+        lualine_b = { branch },
         lualine_c = {
-          filename,
-          filetype,
-          space,
-          branch,
           space,
           diff,
           space,
+          filename,
           location,
         },
         lualine_x = {
