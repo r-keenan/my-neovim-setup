@@ -11,10 +11,23 @@
       },
       {
         "language": [
+          "js",
           "javascript",
-          "javascriptreact"
+          "javascriptreact",
+          "svelte",
+          "vue"
         ],
         "path": "./javascript.json"
+      },
+      {
+        "language": [
+          "ts",
+          "typescript",
+          "typescriptreact",
+          "svelte",
+          "vue"
+        ],
+        "path": "./typescript.json"
       },
       {
         "language": [
