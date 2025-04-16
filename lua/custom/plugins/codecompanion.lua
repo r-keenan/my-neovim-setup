@@ -88,13 +88,27 @@ return {
           end,
           ollama = function()
             return require('codecompanion.adapters').extend('ollama', {
-              name = 'codellama', -- Give this adapter a different name to differentiate it from the default ollama adapter
+              name = 'codellama',
               env = {
                 url = 'http://localhost:11434',
               },
               schema = {
                 model = {
                   default = 'codellama:latest',
+                },
+              },
+              system_prompt = sys_prompt,
+            })
+          end,
+          openai = function()
+            return require('codecompanion.adapters').extend('openai', {
+              name = 'gpt',
+              env = {
+                api_key = 'cmd:op read op://personal/OpenAI-API-Key/credential --no-newline',
+              },
+              schema = {
+                model = {
+                  default = 'gpt-4',
                 },
               },
               system_prompt = sys_prompt,
