@@ -23,21 +23,6 @@ return {
     -- Function to get a complete config with the current provider
     local function get_config()
       return {
-        llm = {
-          provider = current_provider,
-
-          -- Anthropic configuration
-          anthropic = {
-            model = 'claude-3-opus-20240229',
-            api_key = 'cmd:op read op://personal/Anthropic/credential --no-newline',
-          },
-
-          -- Ollama configuration
-          ollama = {
-            model = 'llama3',
-            url = 'http://localhost:11434',
-          },
-        },
         language_servers = {
           omnisharp = true,
         },
@@ -58,6 +43,9 @@ return {
           ['```sql'] = 'sql',
           ['```markdown'] = 'markdown',
           ['```php'] = 'php',
+          ['```csharp'] = 'c_sharp',
+          ['```cs'] = 'c_sharp',
+          ['```c#'] = 'c_sharp',
         },
         markdown = {
           code_block_format = {
@@ -87,6 +75,27 @@ return {
               env = {
                 api_key = 'cmd:op read op://personal/Anthropic/credential --no-newline',
               },
+              schema = {
+                model = {
+                  default = 'claude-3-7-sonnet-latest',
+                },
+              },
+            })
+          end,
+          ollama = function()
+            return require('codecompanion.adapters').extend('ollama', {
+              -- Any custom configuration for Ollama if needed
+              --{
+              name = 'codellama', -- Give this adapter a different name to differentiate it from the default ollama adapter
+              env = {
+                url = 'http://localhost:11434',
+              },
+              schema = {
+                model = {
+                  default = 'codellama:latest',
+                },
+              },
+              system_prompt = [[You are a helpful coding assistant. Always format your code responses using markdown code blocks with explicit language identifiers, like ```python, ```javascript, ```csharp, etc.]],
             })
           end,
         },
