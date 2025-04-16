@@ -7,6 +7,7 @@ return {
     'nvim-telescope/telescope.nvim', -- Optional: For using slash commands
     { 'MeanderingProgrammer/render-markdown.nvim', ft = { 'markdown', 'codecompanion' } }, -- Optional: For prettier markdown rendering
     { 'stevearc/dressing.nvim', opts = {} }, -- Optional: Improves `vim.ui.select`
+    'Davidyz/VectorCode',
   },
   config = function()
     vim.api.nvim_create_autocmd('FileType', {
@@ -47,6 +48,10 @@ return {
       strategies = {
         chat = {
           adapter = 'anthropic',
+          slash_commands = {
+            -- add the vectorcode command here.
+            codebase = require('vectorcode.integrations').codecompanion.chat.make_slash_command(),
+          },
         },
         inline = {
           adapter = 'anthropic',
