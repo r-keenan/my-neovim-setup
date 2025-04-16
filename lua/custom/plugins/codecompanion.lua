@@ -12,6 +12,8 @@ return {
   config = function()
     -- Create a variable to track the current provider
     local current_provider = 'anthropic' -- Default provider
+    local sys_prompt =
+      [[You are a helpful coding assistant. Always format your code responses using markdown code blocks with explicit language identifiers, like ```python, ```javascript, ```csharp, etc.]]
 
     vim.api.nvim_create_autocmd('FileType', {
       pattern = 'codecompanion',
@@ -58,6 +60,7 @@ return {
             slash_commands = {
               codebase = require('vectorcode.integrations').codecompanion.chat.make_slash_command(),
             },
+            system_prompt = sys_prompt,
           },
           inline = {
             adapter = current_provider,
@@ -80,12 +83,11 @@ return {
                   default = 'claude-3-7-sonnet-latest',
                 },
               },
+              system_prompt = sys_prompt,
             })
           end,
           ollama = function()
             return require('codecompanion.adapters').extend('ollama', {
-              -- Any custom configuration for Ollama if needed
-              --{
               name = 'codellama', -- Give this adapter a different name to differentiate it from the default ollama adapter
               env = {
                 url = 'http://localhost:11434',
@@ -95,27 +97,12 @@ return {
                   default = 'codellama:latest',
                 },
               },
-              system_prompt = [[You are a helpful coding assistant. Always format your code responses using markdown code blocks with explicit language identifiers, like ```python, ```javascript, ```csharp, etc.]],
+              system_prompt = sys_prompt,
             })
           end,
         },
       }
     end
-
-    -- Function to update provider config
-    local function update_provider_config()
-      require('codecompanion').setup(get_config())
-      vim.notify('CodeCompanion is now using ' .. current_provider, vim.log.levels.INFO)
-    end
-
-    -- Toggle function to switch between providers
-    local function toggle_llm_provider()
-      current_provider = current_provider == 'anthropic' and 'ollama' or 'anthropic'
-      update_provider_config()
-    end
-
-    -- Register command to toggle provider
-    vim.api.nvim_create_user_command('CodeCompanionToggleProvider', toggle_llm_provider, {})
 
     require('codecompanion').setup(get_config())
 
@@ -129,8 +116,6 @@ return {
       '<cmd>CodeCompanionChat Add<cr>',
       { noremap = true, silent = true, desc = 'Add code to CodeCompanionChat window' }
     )
-    -- Add keybinding for toggling provider
-    vim.keymap.set('n', '<leader>ct', '<cmd>CodeCompanionToggleProvider<cr>', { noremap = true, silent = true, desc = 'Toggle LLM provider' })
 
     -- Expand 'cc' into 'CodeCompanion' in the command line
     vim.cmd [[cab cc CodeCompanion]]
