@@ -192,9 +192,6 @@ local options = { noremap = true }
 vim.keymap.set('i', 'jj', '<Esc>', options)
 
 -- Diagnostic keymaps
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
@@ -218,9 +215,9 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 -- Split Left
 vim.keymap.set('n', '<leader>sl', ':leftabove vsplit<CR>', { noremap = true, silent = true })
 -- Split Right
-vim.keymap.set('n', '<leader>sr', '<C-w>v', { desc = '[s]plit Window on [y]-axis/Vertically' })
+vim.keymap.set('n', '<leader>sy', '<C-w>v', { desc = '[s]plit Window on [y]-axis/Vertically' })
 -- Split Down
-vim.keymap.set('n', '<leader>sd', '<C-w>s', { desc = '[s]plit Window on [x]-axis/horizontally' })
+vim.keymap.set('n', '<leader>sx', '<C-w>s', { desc = '[s]plit Window on [x]-axis/horizontally' })
 
 -- Resize windows
 vim.keymap.set('n', '<leader>se', '<C-w>=', { desc = 'Make [s]plit [e]qual sizes' })
@@ -1044,7 +1041,7 @@ require('lazy').setup({
       -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
       -- - sd'   - [S]urround [D]elete [']quotes
       -- - sr)'  - [S]urround [R]eplace [)] [']
-      require('mini.surround').setup()
+      --require('mini.surround').setup {}
 
       -- Simple and easy statusline.
       --  You could remove this setup call if you don't like it,
