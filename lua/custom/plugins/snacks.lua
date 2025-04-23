@@ -76,20 +76,6 @@ return {
     local Snacks = require 'snacks'
     return {
       {
-        '<leader>z',
-        function()
-          Snacks.zen()
-        end,
-        desc = 'Toggle Zen Mode',
-      },
-      {
-        '<leader>Z',
-        function()
-          Snacks.zen.zoom()
-        end,
-        desc = 'Toggle Zoom',
-      },
-      {
         '<leader>.',
         function()
           Snacks.scratch()
@@ -102,20 +88,6 @@ return {
           Snacks.scratch.select()
         end,
         desc = 'Select Scratch Buffer',
-      },
-      {
-        '<leader>n',
-        function()
-          Snacks.notifier.show_history()
-        end,
-        desc = 'Notification History',
-      },
-      {
-        '<leader>cR',
-        function()
-          Snacks.rename.rename_file()
-        end,
-        desc = 'Rename File',
       },
       {
         '<leader>gB',
@@ -133,13 +105,6 @@ return {
         desc = 'Git Blame Line',
       },
       {
-        '<leader>gf',
-        function()
-          Snacks.lazygit.log_file()
-        end,
-        desc = 'Lazygit Current File History',
-      },
-      {
         '<leader>lg',
         function()
           Snacks.lazygit()
@@ -147,32 +112,11 @@ return {
         desc = 'Lazygit',
       },
       {
-        '<leader>gl',
-        function()
-          Snacks.lazygit.log()
-        end,
-        desc = 'Lazygit Log (cwd)',
-      },
-      {
-        '<leader>un',
-        function()
-          Snacks.notifier.hide()
-        end,
-        desc = 'Dismiss All Notifications',
-      },
-      {
         '<leader>tt',
         function()
           Snacks.terminal()
         end,
         desc = 'Toggle Terminal',
-      },
-      {
-        '<c-_>',
-        function()
-          Snacks.terminal()
-        end,
-        desc = 'which_key_ignore',
       },
       {
         ']]',
