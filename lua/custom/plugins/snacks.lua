@@ -1,27 +1,5 @@
-local headerLogo = {
-  {
-    [[ =================     ===============     ===============   ========  ========
-  \\ . . . . . . .\\   //. . . . . . .\\   //. . . . . . .\\  \\. . .\\// . . //
-  ||. . ._____. . .|| ||. . ._____. . .|| ||. . ._____. . .|| || . . .\/ . . .||
-  || . .||   ||. . || || . .||   ||. . || || . .||   ||. . || ||. . . . . . . ||
-  ||. . ||   || . .|| ||. . ||   || . .|| ||. . ||   || . .|| || . | . . . . .||
-  || . .||   ||. _-|| ||-_ .||   ||. . || || . .||   ||. _-|| ||-_.|\ . . . . ||
-  ||. . ||   ||-'  || ||  `-||   || . .|| ||. . ||   ||-'  || ||  `|\_ . .|. .||
-  || . _||   ||    || ||    ||   ||_ . || || . _||   ||    || ||   |\ `-_/| . ||
-  ||_-' ||  .|/    || ||    \|.  || `-_|| ||_-' ||  .|/    || ||   | \  / |-_.||
-  ||    ||_-'      || ||      `-_||    || ||    ||_-'      || ||   | \  / |  `||
-  ||    `'         || ||         `'    || ||    `'         || ||   | \  / |   ||
-  ||            .===' `===.         .==='.`===.         .===' /==. |  \/  |   ||
-  ||         .=='   \_|-_ `===. .==='   _|_   `===. .===' _-|/   `==  \/  |   ||
-  ||      .=='    _-'    `-_  `='    _-'   `-_    `='  _-'   `-_  /|  \/  |   ||
-  ||   .=='    _-'          '-__\._-'         '-_./__-'         `' |. /|  |   ||
-  ||.=='    _-'                                                     `' |  /==.||
-  =='    _-'                        N E O V I M                         \/   `==
-  \   _-'                                                                `-_   /
-   `''                                                                      ``' 
-    ]],
-  },
-}
+local imagePath = '~/.config/nvim/grug.png'
+local cachedImageOutput = nil
 
 return {
   'folke/snacks.nvim',
@@ -29,26 +7,28 @@ return {
   lazy = false,
   ---@type snacks.Config
   opts = {
-    preset = {
-
-      header = headerLogo,
-    },
     bigfile = { enabled = true },
     dashboard = {
       enabled = true,
       sections = {
         {
-          text = headerLogo,
-          align = 'center',
-          height = 6,
-          padding = 1,
+          section = 'terminal',
+          cmd = 'cat /tmp/nvim_dashboard_image.txt 2>/dev/null || (chafa '
+            .. imagePath
+            .. ' -f symbols --size 60x17 --stretch | tee /tmp/nvim_dashboard_image.txt); sleep 0.2',
+          height = 17,
+          padding = 3,
         },
-        { section = 'keys', gap = 1, padding = 1 },
-        { icon = ' ', title = 'Recent Files', section = 'recent_files', indent = 2, padding = 1 },
-        { icon = ' ', title = 'Projects', section = 'projects', indent = 2, padding = 1 },
-        { section = 'startup' },
+        {
+          pane = 2,
+          { section = 'keys', gap = 1, padding = 1 },
+          { icon = ' ', title = 'Recent Files', section = 'recent_files', indent = 2, padding = 1 },
+          { icon = ' ', title = 'Projects', section = 'projects', indent = 2, padding = 1 },
+          { section = 'startup' },
+        },
       },
     },
+    image = { enabled = true },
     indent = { enabled = true },
     input = { enabled = true },
     notifier = {
@@ -155,6 +135,8 @@ return {
     }
   end,
   init = function()
+    -- Preload the chafa command and save to a temporary file
+    vim.fn.jobstart('chafa ' .. imagePath .. ' -f symbols --size 60x17 --stretch > /tmp/nvim_dashboard_image.txt', { detach = true })
     vim.api.nvim_create_autocmd('User', {
       pattern = 'VeryLazy',
       callback = function()
