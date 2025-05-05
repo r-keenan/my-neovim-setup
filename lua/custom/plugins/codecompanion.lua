@@ -13,7 +13,7 @@ return {
     -- Create a variable to track the current provider
     local current_provider = 'anthropic' -- Default provider
     local sys_prompt =
-      [[You are a helpful coding assistant. Always format your code responses using markdown code blocks with explicit language identifiers, like ```python, ```javascript, ```csharp, etc.]]
+      [[You are a helpful coding assistant. Always format your code responses using markdown code blocks with explicit language identifiers, like ```python, ```javascript, ```csharp, etc. Please do not hullicinate. If you are not able to be highly confident in an answer, say the phrase 'I do not know.']]
 
     vim.api.nvim_create_autocmd('FileType', {
       pattern = 'codecompanion',
