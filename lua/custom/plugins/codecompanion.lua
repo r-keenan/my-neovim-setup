@@ -15,6 +15,8 @@ return {
     local sys_prompt =
       [[You are a helpful coding assistant. Always format your code responses using markdown code blocks with explicit language identifiers, like ```python, ```javascript, ```csharp, etc. Be concise while still being thorough. Only give a maximum of three ways to solve a problem.']]
 
+    local token_limit = 8000
+
     vim.api.nvim_create_autocmd('FileType', {
       pattern = 'codecompanion',
       callback = function()
@@ -82,6 +84,9 @@ return {
                 model = {
                   default = 'claude-3-7-sonnet-latest',
                 },
+                max_tokens = {
+                  default = token_limit,
+                },
               },
               system_prompt = sys_prompt,
             })
@@ -109,6 +114,9 @@ return {
               schema = {
                 model = {
                   default = 'gpt-4',
+                },
+                max_tokens = {
+                  default = token_limit,
                 },
               },
               system_prompt = sys_prompt,
