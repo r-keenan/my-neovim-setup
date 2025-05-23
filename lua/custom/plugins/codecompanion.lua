@@ -82,7 +82,7 @@ return {
               },
               schema = {
                 model = {
-                  default = 'claude-3-7-sonnet-latest',
+                  default = 'claude-sonnet-4-20250514',
                 },
                 max_tokens = {
                   default = token_limit,
