@@ -727,7 +727,7 @@ require('lazy').setup({
         elixirls = {},
         emmet_language_server = {},
         terraformls = {},
-        intelephense = {},
+        azure_pipelines_ls = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
         -- Some languages (like typescript) have entire language plugins that can be useful:
@@ -776,7 +776,6 @@ require('lazy').setup({
         'csharpier',
         'ts_ls',
         'lemminx',
-        'intelephense',
         'vimls',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
