@@ -709,7 +709,6 @@ require('lazy').setup({
         ts_ls = {},
         pyright = {},
         omnisharp = {},
-        angularls = {},
         dockerls = {},
         cspell = {
           config_file = vim.fn.expand '~/.config/nvim/cspell.json',
