@@ -707,7 +707,17 @@ require('lazy').setup({
         gopls = {},
         svelte = {},
         ts_ls = {},
-        pyright = {},
+        basedpyright = {
+          settings = {
+            basedpyright = {
+              analysis = {
+                autoSearchPaths = true,
+                diagnosticMode = 'openFilesOnly',
+                useLibraryCodeForTypes = true,
+              },
+            },
+          },
+        },
         omnisharp = {},
         dockerls = {},
         cspell = {
@@ -768,8 +778,7 @@ require('lazy').setup({
         'isort', -- python formatter
         'black', -- python formatter
         'prettierd',
-        'pyright',
-        'google-java-format',
+        'basedpyright',
         'eslint_d',
         'yamllint',
         'csharpier',
@@ -790,26 +799,6 @@ require('lazy').setup({
             -- certain features of an LSP (for example, turning off formatting for ts_ls)
             server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
             require('lspconfig')[server_name].setup(server)
-          end,
-          jdtls = function()
-            require('java').setup {
-              -- Your custom jdtls settings goes here
-            }
-
-            require('lspconfig').jdtls.setup {
-              -- Your custom nvim-java configuration goes here
-            }
-            require('lspconfig').lemminx.setup {
-              filetypes = { 'xml', 'xsd', 'xsl', 'xslt', 'svg', 'csproj' },
-              settings = {
-                xml = {
-                  schemas = {
-                    -- Add MSBuild schema for .csproj files
-                    ['http://schemas.microsoft.com/developer/msbuild/2003'] = '*.csproj',
-                  },
-                },
-              },
-            }
           end,
         },
       }
@@ -865,7 +854,6 @@ require('lazy').setup({
         go = { 'gofmt' },
         csharp = { 'csharpier' },
         vue = { 'prettierd', 'prettier' },
-        java = { 'google-java-format' },
         php = { 'php-cs-fixer' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
@@ -1081,7 +1069,6 @@ require('lazy').setup({
         'javascript',
         'typescript',
         'yaml',
-        'java',
         'c_sharp',
       },
       -- Autoinstall languages that are not installed
