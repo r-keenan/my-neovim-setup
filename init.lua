@@ -1087,6 +1087,7 @@ require('lazy').setup({
         'python',
         'sql',
         'svelte',
+        'vue',
       },
       -- Autoinstall languages that are not installed
       auto_install = true,
