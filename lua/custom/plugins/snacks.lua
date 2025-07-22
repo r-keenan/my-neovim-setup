@@ -38,13 +38,7 @@ return {
     quickfile = { enabled = true },
     scroll = { enabled = true },
     statuscolumn = { enabled = true },
-    terminal = {
-      win = {
-        wo = {
-          winbar = '',
-        },
-      },
-    },
+    terminal = { enabled = false },
     words = { enabled = true },
     styles = {
       notification = {
@@ -90,13 +84,6 @@ return {
           Snacks.lazygit()
         end,
         desc = 'Lazygit',
-      },
-      {
-        '<leader>tt',
-        function()
-          Snacks.terminal()
-        end,
-        desc = 'Toggle Terminal',
       },
       {
         ']]',
