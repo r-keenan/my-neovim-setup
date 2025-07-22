@@ -1083,6 +1083,10 @@ require('lazy').setup({
         'typescript',
         'yaml',
         'c_sharp',
+        'json',
+        'python',
+        'sql',
+        'svelte',
       },
       -- Autoinstall languages that are not installed
       auto_install = true,
