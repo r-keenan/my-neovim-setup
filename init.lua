@@ -1088,6 +1088,7 @@ require('lazy').setup({
         'sql',
         'svelte',
         'vue',
+        'toml',
       },
       -- Autoinstall languages that are not installed
       auto_install = true,
