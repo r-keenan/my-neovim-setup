@@ -88,6 +88,12 @@ P.S. You can delete this when you're done too. It's your config now! :)
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
+vim.g.conform_format_on_save_enabled = true
+local function toggle_format_on_save()
+  vim.g.conform_format_on_save_enabled = not vim.g.conform_format_on_save_enabled
+  local status = vim.g.conform_format_on_save_enabled and 'enabled' or 'disabled'
+  vim.notify('Format on save ' .. status, vim.log.levels.INFO)
+end
 
 vim.g.python3_host_prog = 'venv/lib/python3.12/site-packages'
 
@@ -199,6 +205,9 @@ vim.diagnostic.config {
 
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+
+-- Toggle formatting off and on
+vim.keymap.set('n', '<leader>tf', toggle_format_on_save, { desc = '[T]oggle [F]ormat on save' })
 
 -- Use 'j + j' to exit Insert mode instead of Esc key
 local options = { noremap = true }
@@ -835,9 +844,9 @@ require('lazy').setup({
     opts = {
       notify_on_error = false,
       format_on_save = function(bufnr)
-        -- Disable "format_on_save lsp_fallback" for languages that don't
-        -- have a well standardized coding style. You can add additional
-        -- languages here or re-enable it for the disabled ones.
+        if not vim.g.conform_format_on_save_enabled then
+          return nil
+        end
         local disable_filetypes = { c = true, cpp = true }
         local lsp_format_opt
         if disable_filetypes[vim.bo[bufnr].filetype] then
