@@ -849,7 +849,7 @@ require('lazy').setup({
         }
 
         for _, dir_pattern in ipairs(disable_directories) do
-          if string.match(bufname, dir_pattern) then
+          if string.match(buff_name, dir_pattern) then
             return nil -- Disable formatting for this directory
           end
         end
