@@ -843,6 +843,17 @@ require('lazy').setup({
         if not vim.g.conform_format_on_save_enabled then
           return nil
         end
+        local buff_name = vim.api.nvim_buf_get_name(bufnr)
+        local disable_directories = {
+          'C:\\Users\\ross.keenan\\dev\\',
+        }
+
+        for _, dir_pattern in ipairs(disable_directories) do
+          if string.match(bufname, dir_pattern) then
+            return nil -- Disable formatting for this directory
+          end
+        end
+
         local disable_filetypes = { c = true, cpp = true }
         local lsp_format_opt
         if disable_filetypes[vim.bo[bufnr].filetype] then
