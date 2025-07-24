@@ -1,4 +1,4 @@
-local imagePath = '~/.config/nvim/grug.png'
+local imagePath = 'grug.png'
 local cachedImageOutput = nil
 
 return {
