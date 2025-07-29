@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  neovim-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: neovim-devcontainer
+    hostname: neovim-dev
+    
+    # Interactive terminal
+    tty: true
+    stdin_open: true
+    
+    # Mount volumes
+    volumes:
+      # Mount the workspace (current directory)
+      - ../../../:/workspace:cached
+      # Mount Neovim config
+      - ~/.config/nvim:/home/r-keenan/.config/nvim:cached
+      # Optional: Mount additional dotfiles (ignore if they don't exist)
+      - ~/.gitconfig:/home/r-keenan/.gitconfig:ro
+      - ~/.ssh:/home/r-keenan/.ssh:ro
+    
+    # Environment variables
+    environment:
+      - SHELL=/bin/zsh
+      - EDITOR=nvim
+      - TERM=xterm-256color
+      - DISPLAY=${DISPLAY:-:0}
+    
+    # Add capabilities for debugging and GUI apps
+    cap_add:
+      - SYS_PTRACE
+    security_opt:
+      - seccomp:unconfined
+    
+    # Network mode for easy port access
+    network_mode: host
+    
+    # Restart policy
+    restart: unless-stopped
