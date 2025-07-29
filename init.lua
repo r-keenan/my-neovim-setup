@@ -110,7 +110,7 @@ vim.g.gitblame_display_virtual_text = 0 -- Disables the inline display
 vim.g.gitblame_enabled = 1 -- Keep the plugin enabled for lualine
 
 -- [[ Setting options ]]
--- See `:help vim.o`
+--  See `:help vim.o`
 -- NOTE: You can change these options as you wish!
 --  For more options, you can see `:help option-list`
 
@@ -538,9 +538,6 @@ require('lazy').setup({
 
       -- Useful status updates for LSP.
       { 'j-hui/fidget.nvim', opts = {} },
-
-      -- Allows extra capabilities provided by nvim-cmp
-      'saghen/blink.cmp',
     },
     config = function()
       -- Brief Aside: **What is LSP?**
@@ -892,7 +889,7 @@ require('lazy').setup({
 
   { -- Autocompletion
     'saghen/blink.cmp',
-    event = 'VimEnter',
+    event = 'InsertEnter',
     version = '1.*',
     dependencies = {
       -- Snippet Engine
@@ -920,39 +917,52 @@ require('lazy').setup({
           end,
         },
       },
-      opts = {},
+      'folke/lazydev.nvim',
     },
-    'folke/lazydev.nvim',
-  },
-  --- @module 'blink.cmp'
-  --- @type blink.cmp.Config
-  opts = {
+    --- @module 'blink.cmp'
+    --- @type blink.cmp.Config
+    opts = {
     keymap = {
-      -- 'default' (recommended) for mappings similar to built-in completions
-      --   <c-y> to accept ([y]es) the completion.
-      --    This will auto-import if your LSP supports it.
-      --    This will expand snippets if the LSP sent a snippet.
-      -- 'super-tab' for tab to accept
-      -- 'enter' for enter to accept
-      -- 'none' for no mappings
-      --
-      -- For an understanding of why the 'default' preset is recommended,
-      -- you will need to read `:help ins-completion`
-      --
-      -- No, but seriously. Please read `:help ins-completion`, it is really good!
-      --
-      -- All presets have the following mappings:
-      -- <tab>/<s-tab>: move to right/left of your snippet expansion
-      -- <c-space>: Open menu or open docs if already open
-      -- <c-n>/<c-p> or <up>/<down>: Select next/previous item
-      -- <c-e>: Hide menu
-      -- <c-k>: Toggle signature help
-      --
-      -- See :h blink-cmp-config-keymap for defining your own keymap
-      preset = 'default',
-
-      -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
-      --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
+      preset = 'none', -- Disable default mappings to use custom ones
+      
+      -- Custom keymaps to match nvim-cmp behavior
+      ['<C-n>'] = { 'select_next', 'fallback' },
+      ['<C-p>'] = { 'select_prev', 'fallback' },
+      ['<C-b>'] = { 'scroll_documentation_up', 'fallback' },
+      ['<C-f>'] = { 'scroll_documentation_down', 'fallback' },
+      ['<C-Space>'] = { 'show', 'show_documentation', 'hide_documentation' },
+      ['<C-e>'] = { 'hide', 'fallback' },
+      
+      -- Accept completion with Enter (like nvim-cmp)
+      ['<CR>'] = { 'accept', 'fallback' },
+      
+      -- Snippet navigation (like nvim-cmp with C-l/C-h)
+      ['<C-l>'] = {
+        function(cmp)
+          local luasnip = require('luasnip')
+          if luasnip.expand_or_locally_jumpable() then
+            luasnip.expand_or_jump()
+          else
+            return cmp.select_next()
+          end
+        end,
+        'fallback',
+      },
+      ['<C-h>'] = {
+        function(cmp)
+          local luasnip = require('luasnip')
+          if luasnip.locally_jumpable(-1) then
+            luasnip.jump(-1)
+          else
+            return cmp.select_prev()
+          end
+        end,
+        'fallback',
+      },
+      
+      -- Keep tab for snippet expansion
+      ['<Tab>'] = { 'snippet_forward', 'fallback' },
+      ['<S-Tab>'] = { 'snippet_backward', 'fallback' },
     },
 
     appearance = {
@@ -962,15 +972,32 @@ require('lazy').setup({
     },
 
     completion = {
+      -- Match nvim-cmp behavior: menu,menuone,noinsert
+      menu = {
+        auto_show = true,
+        draw = {
+          treesitter = { 'lsp' },
+        },
+      },
       -- By default, you may press `<c-space>` to show the documentation.
       -- Optionally, set `auto_show = true` to show the documentation after a delay.
-      documentation = { auto_show = false, auto_show_delay_ms = 500 },
+      documentation = { 
+        auto_show = true, 
+        auto_show_delay_ms = 500,
+        window = { border = 'rounded' },
+      },
+      ghost_text = { enabled = false }, -- Disable ghost text to match nvim-cmp
     },
 
     sources = {
-      default = { 'lsp', 'path', 'snippets', 'lazydev' },
+      default = { 'lsp', 'path', 'snippets', 'buffer', 'lazydev' },
       providers = {
         lazydev = { module = 'lazydev.integrations.blink', score_offset = 100 },
+        -- Add max item counts like nvim-cmp
+        lsp = { max_items = 10 },
+        snippets = { max_items = 5 },
+        buffer = { max_items = 5 },
+        path = { max_items = 5 },
       },
     },
 
@@ -987,8 +1014,8 @@ require('lazy').setup({
 
     -- Shows a signature help window while you type arguments for a function
     signature = { enabled = true },
+    },
   },
-
   { -- You can easily change to a different colorscheme.
     -- Change the name of the colorscheme plugin below, and then
     -- change the command in the config to whatever the name of that colorscheme is
