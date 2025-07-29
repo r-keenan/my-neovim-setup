@@ -14,8 +14,6 @@ return {
 
     -- Go
     'leoluz/nvim-dap-go',
-    -- C#/.Net
-    'NicholasMata/nvim-dap-cs',
   },
   keys = {
     -- Basic debugging keymaps, feel free to change to your liking!
@@ -65,6 +63,7 @@ return {
   },
   config = function()
     local dap = require 'dap'
+    local dotnet = require 'easy-dotnet'
     local dapui = require 'dapui'
 
     require('mason-nvim-dap').setup {
@@ -72,14 +71,7 @@ return {
       handlers = {},
       ensure_installed = {
         'delve',
-        'netcoredbg',
       },
-    }
-
-    dap.adapters.coreclr = {
-      type = 'executable',
-      command = vim.fn.exepath 'netcoredbg', -- This finds netcoredbg in PATH
-      args = { '--interpreter=vscode' },
     }
 
     -- Dap UI setup
@@ -127,6 +119,5 @@ return {
         detached = vim.fn.has 'win32' == 0,
       },
     }
-    require('dap-cs').setup()
   end,
 }
