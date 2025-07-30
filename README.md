@@ -1,4 +1,4 @@
-# kickstart.nvim
+# My Neovim Setup
 
 ## Introduction
 
@@ -6,7 +6,17 @@ This is based off of [Kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim
 
 ## Installation
 
-### Install Neovim
+### Install via DevContainer
+
+Ensure that you have Docker and Docker Desktop installed on your machine. Then clone the repo, and `cd` into the root directory of the repo. Then run the following:
+
+```bash
+docker compose up
+```
+
+That is it! **All** dependencies should automatically install inside the Docker container.
+
+### Install Neovim (traditional installation)
 
 Kickstart.nvim targets _only_ the latest
 ['stable'](https://github.com/neovim/neovim/releases/tag/stable) and latest
@@ -22,7 +32,6 @@ External Requirements:
 
 - Basic utils: `git`, `make`, `unzip`, C Compiler (`gcc`)
 - [ripgrep](https://github.com/BurntSushi/ripgrep#installation)
-- Chafa: `Snacks.nvim dashboard picture rendering`
 - A [Nerd Font](https://www.nerdfonts.com/): optional, provides various icons
   - if you have it set `vim.g.have_nerd_font` in `init.lua` to true
 - Language Setup:
@@ -41,14 +50,14 @@ Neovim's configurations are located under the following paths, depending on your
 | Windows (cmd)        | `%userprofile%\AppData\Local\nvim\`       |
 | Windows (powershell) | `$env:USERPROFILE\AppData\Local\nvim\`    |
 
-### Install Kickstart
+### Install My Neovim
 
-Clone kickstart.nvim:
+Clone:
 
 <details><summary> Linux and Mac </summary>
 
 ```sh
-git clone https://github.com/nvim-lua/kickstart.nvim.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim
+git clone https://github.com/r-keenan/my-neovim-setup.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim
 ```
 
 </details>
