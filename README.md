@@ -2,13 +2,7 @@
 
 ## Introduction
 
-A starting point for Neovim that is:
-
-- Small
-- Single-file
-- Completely Documented
-
-**NOT** a Neovim distribution, but instead a starting point for your configuration.
+This is based off of [Kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim), and it has been extended wit more features.
 
 ## Installation
 
