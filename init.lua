@@ -457,11 +457,6 @@ require('lazy').setup({
             'absolute',
           },
         },
-        pickers = {
-          find_files = {
-            hidden = true,
-          },
-        },
         extensions = {
           ['ui-select'] = {
             require('telescope.themes').get_dropdown(),
@@ -922,100 +917,100 @@ require('lazy').setup({
     --- @module 'blink.cmp'
     --- @type blink.cmp.Config
     opts = {
-    keymap = {
-      preset = 'none', -- Disable default mappings to use custom ones
-      
-      -- Custom keymaps to match nvim-cmp behavior
-      ['<C-n>'] = { 'select_next', 'fallback' },
-      ['<C-p>'] = { 'select_prev', 'fallback' },
-      ['<Up>'] = { 'select_prev', 'fallback' },
-      ['<Down>'] = { 'select_next', 'fallback' },
-      ['<C-b>'] = { 'scroll_documentation_up', 'fallback' },
-      ['<C-f>'] = { 'scroll_documentation_down', 'fallback' },
-      ['<C-Space>'] = { 'show', 'show_documentation', 'hide_documentation' },
-      ['<C-e>'] = { 'hide', 'fallback' },
-      
-      -- Accept completion with Enter (like nvim-cmp)
-      ['<CR>'] = { 'accept', 'fallback' },
-      
-      -- Snippet navigation (like nvim-cmp with C-l/C-h)
-      ['<C-l>'] = {
-        function(cmp)
-          local luasnip = require('luasnip')
-          if luasnip.expand_or_locally_jumpable() then
-            luasnip.expand_or_jump()
-          else
-            return cmp.select_next()
-          end
-        end,
-        'fallback',
-      },
-      ['<C-h>'] = {
-        function(cmp)
-          local luasnip = require('luasnip')
-          if luasnip.locally_jumpable(-1) then
-            luasnip.jump(-1)
-          else
-            return cmp.select_prev()
-          end
-        end,
-        'fallback',
-      },
-      
-      -- Keep tab for snippet expansion
-      ['<Tab>'] = { 'snippet_forward', 'fallback' },
-      ['<S-Tab>'] = { 'snippet_backward', 'fallback' },
-    },
+      keymap = {
+        preset = 'none', -- Disable default mappings to use custom ones
 
-    appearance = {
-      -- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
-      -- Adjusts spacing to ensure icons are aligned
-      nerd_font_variant = 'mono',
-    },
+        -- Custom keymaps to match nvim-cmp behavior
+        ['<C-n>'] = { 'select_next', 'fallback' },
+        ['<C-p>'] = { 'select_prev', 'fallback' },
+        ['<Up>'] = { 'select_prev', 'fallback' },
+        ['<Down>'] = { 'select_next', 'fallback' },
+        ['<C-b>'] = { 'scroll_documentation_up', 'fallback' },
+        ['<C-f>'] = { 'scroll_documentation_down', 'fallback' },
+        ['<C-Space>'] = { 'show', 'show_documentation', 'hide_documentation' },
+        ['<C-e>'] = { 'hide', 'fallback' },
 
-    completion = {
-      -- Match nvim-cmp behavior: menu,menuone,noinsert
-      menu = {
-        auto_show = true,
-        draw = {
-          treesitter = { 'lsp' },
+        -- Accept completion with Enter (like nvim-cmp)
+        ['<CR>'] = { 'accept', 'fallback' },
+
+        -- Snippet navigation (like nvim-cmp with C-l/C-h)
+        ['<C-l>'] = {
+          function(cmp)
+            local luasnip = require 'luasnip'
+            if luasnip.expand_or_locally_jumpable() then
+              luasnip.expand_or_jump()
+            else
+              return cmp.select_next()
+            end
+          end,
+          'fallback',
+        },
+        ['<C-h>'] = {
+          function(cmp)
+            local luasnip = require 'luasnip'
+            if luasnip.locally_jumpable(-1) then
+              luasnip.jump(-1)
+            else
+              return cmp.select_prev()
+            end
+          end,
+          'fallback',
+        },
+
+        -- Keep tab for snippet expansion
+        ['<Tab>'] = { 'snippet_forward', 'fallback' },
+        ['<S-Tab>'] = { 'snippet_backward', 'fallback' },
+      },
+
+      appearance = {
+        -- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
+        -- Adjusts spacing to ensure icons are aligned
+        nerd_font_variant = 'mono',
+      },
+
+      completion = {
+        -- Match nvim-cmp behavior: menu,menuone,noinsert
+        menu = {
+          auto_show = true,
+          draw = {
+            treesitter = { 'lsp' },
+          },
+        },
+        -- By default, you may press `<c-space>` to show the documentation.
+        -- Optionally, set `auto_show = true` to show the documentation after a delay.
+        documentation = {
+          auto_show = true,
+          auto_show_delay_ms = 500,
+          window = { border = 'rounded' },
+        },
+        ghost_text = { enabled = false }, -- Disable ghost text to match nvim-cmp
+      },
+
+      sources = {
+        default = { 'lsp', 'path', 'snippets', 'buffer', 'lazydev' },
+        providers = {
+          lazydev = { module = 'lazydev.integrations.blink', score_offset = 100 },
+          -- Add max item counts like nvim-cmp
+          lsp = { max_items = 10 },
+          snippets = { max_items = 5 },
+          buffer = { max_items = 5 },
+          path = { max_items = 5 },
         },
       },
-      -- By default, you may press `<c-space>` to show the documentation.
-      -- Optionally, set `auto_show = true` to show the documentation after a delay.
-      documentation = { 
-        auto_show = true, 
-        auto_show_delay_ms = 500,
-        window = { border = 'rounded' },
-      },
-      ghost_text = { enabled = false }, -- Disable ghost text to match nvim-cmp
-    },
 
-    sources = {
-      default = { 'lsp', 'path', 'snippets', 'buffer', 'lazydev' },
-      providers = {
-        lazydev = { module = 'lazydev.integrations.blink', score_offset = 100 },
-        -- Add max item counts like nvim-cmp
-        lsp = { max_items = 10 },
-        snippets = { max_items = 5 },
-        buffer = { max_items = 5 },
-        path = { max_items = 5 },
-      },
-    },
+      snippets = { preset = 'luasnip' },
 
-    snippets = { preset = 'luasnip' },
+      -- Blink.cmp includes an optional, recommended rust fuzzy matcher,
+      -- which automatically downloads a prebuilt binary when enabled.
+      --
+      -- By default, we use the Lua implementation instead, but you may enable
+      -- the rust implementation via `'prefer_rust_with_warning'`
+      --
+      -- See :h blink-cmp-config-fuzzy for more information
+      fuzzy = { implementation = 'lua' },
 
-    -- Blink.cmp includes an optional, recommended rust fuzzy matcher,
-    -- which automatically downloads a prebuilt binary when enabled.
-    --
-    -- By default, we use the Lua implementation instead, but you may enable
-    -- the rust implementation via `'prefer_rust_with_warning'`
-    --
-    -- See :h blink-cmp-config-fuzzy for more information
-    fuzzy = { implementation = 'lua' },
-
-    -- Shows a signature help window while you type arguments for a function
-    signature = { enabled = true },
+      -- Shows a signature help window while you type arguments for a function
+      signature = { enabled = true },
     },
   },
   { -- You can easily change to a different colorscheme.
