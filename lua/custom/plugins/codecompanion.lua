@@ -28,7 +28,7 @@ return {
     local function get_config()
       return {
         language_servers = {
-          omnisharp = true,
+          roslyn = true,
         },
         filetypes = {
           'cs',
