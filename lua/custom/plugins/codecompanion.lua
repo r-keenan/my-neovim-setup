@@ -59,9 +59,6 @@ return {
         strategies = {
           chat = {
             adapter = current_provider,
-            slash_commands = {
-              codebase = require('vectorcode.integrations').codecompanion.chat.make_slash_command(),
-            },
             system_prompt = sys_prompt,
           },
           inline = {
