@@ -782,6 +782,7 @@ require('lazy').setup({
         'ts_ls',
         'lemminx',
         'vimls',
+        'taplo',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
@@ -861,6 +862,7 @@ require('lazy').setup({
         csharp = { 'csharpier' },
         vue = { 'prettierd', 'prettier' },
         php = { 'php-cs-fixer' },
+        toml = { 'taplo' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
