@@ -921,6 +921,8 @@ require('lazy').setup({
     opts = {
       keymap = {
         preset = 'default', -- Disable default mappings to use custom ones
+        -- Accept completion with Enter (like nvim-cmp)
+        ['<CR>'] = { 'accept', 'fallback' },
       },
 
       appearance = {
