@@ -176,7 +176,7 @@ vim.opt.timeoutlen = 300
 -- Configure how new splits should be opened
 vim.opt.splitright = true
 vim.opt.splitbelow = true
-vim.opt.tabstop = 4
+--vim.opt.tabstop = 4
 
 -- Sets how neovim will display certain whitespace in the editor.
 --  See `:help 'list'`
@@ -527,7 +527,7 @@ require('lazy').setup({
       -- Mason must be loaded before its dependents so we need to set it up here.
       -- NOTE: `opts = {}` is the same as calling `require('mason').setup({})`
       {
-        { 'mason-org/mason.nvim', opts = {} },
+        'mason-org/mason.nvim',
         opts = {
           registries = {
             'github:mason-org/mason-registry',
