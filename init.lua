@@ -872,7 +872,6 @@ require('lazy').setup({
         go = { 'gofmt' },
         csharp = { 'csharpier' },
         vue = { 'prettierd', 'prettier' },
-        php = { 'php-cs-fixer' },
         toml = { 'taplo' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
@@ -880,17 +879,6 @@ require('lazy').setup({
         -- You can use a sub-list to tell conform to run *until* a formatter
         -- is found.
         -- javascript = { { "prettierd", "prettier" } },
-      },
-      formatters = {
-        ['php-cs-fixer'] = {
-          command = 'php-cs-fixer',
-          args = {
-            'fix',
-            '--rules=@PSR12', -- Formatting preset. Other presets are available, see the php-cs-fixer docs.
-            '$FILENAME',
-          },
-          stdin = false,
-        },
       },
     },
   },
@@ -932,48 +920,7 @@ require('lazy').setup({
     --- @type blink.cmp.Config
     opts = {
       keymap = {
-        preset = 'none', -- Disable default mappings to use custom ones
-
-        -- Custom keymaps to match nvim-cmp behavior
-        ['<C-n>'] = { 'select_next', 'fallback' },
-        ['<C-p>'] = { 'select_prev', 'fallback' },
-        ['<Up>'] = { 'select_prev', 'fallback' },
-        ['<Down>'] = { 'select_next', 'fallback' },
-        ['<C-b>'] = { 'scroll_documentation_up', 'fallback' },
-        ['<C-f>'] = { 'scroll_documentation_down', 'fallback' },
-        ['<C-Space>'] = { 'show', 'show_documentation', 'hide_documentation' },
-        ['<C-e>'] = { 'hide', 'fallback' },
-
-        -- Accept completion with Enter (like nvim-cmp)
-        ['<CR>'] = { 'accept', 'fallback' },
-
-        -- Snippet navigation (like nvim-cmp with C-l/C-h)
-        ['<C-l>'] = {
-          function(cmp)
-            local luasnip = require 'luasnip'
-            if luasnip.expand_or_locally_jumpable() then
-              luasnip.expand_or_jump()
-            else
-              return cmp.select_next()
-            end
-          end,
-          'fallback',
-        },
-        ['<C-h>'] = {
-          function(cmp)
-            local luasnip = require 'luasnip'
-            if luasnip.locally_jumpable(-1) then
-              luasnip.jump(-1)
-            else
-              return cmp.select_prev()
-            end
-          end,
-          'fallback',
-        },
-
-        -- Keep tab for snippet expansion
-        ['<Tab>'] = { 'snippet_forward', 'fallback' },
-        ['<S-Tab>'] = { 'snippet_backward', 'fallback' },
+        preset = 'default', -- Disable default mappings to use custom ones
       },
 
       appearance = {
@@ -988,7 +935,6 @@ require('lazy').setup({
         documentation = {
           auto_show = false,
           auto_show_delay_ms = 500,
-          window = { border = 'rounded' },
         },
       },
 
@@ -1070,7 +1016,7 @@ require('lazy').setup({
       -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
       -- - sd'   - [S]urround [D]elete [']quotes
       -- - sr)'  - [S]urround [R]eplace [)] [']
-      --require('mini.surround').setup {}
+      require('mini.surround').setup {}
 
       -- Simple and easy statusline.
       --  You could remove this setup call if you don't like it,

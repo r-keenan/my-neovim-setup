@@ -13,6 +13,7 @@ return {
         typescriptreact = { 'eslint_d' },
         svelte = { 'eslint_d' },
         yaml = { 'yamllint' },
+        csharp = { 'roslyn' },
         --python = { 'pylint' },
       }
 
