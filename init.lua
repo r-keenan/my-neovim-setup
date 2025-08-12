@@ -527,7 +527,7 @@ require('lazy').setup({
       -- Mason must be loaded before its dependents so we need to set it up here.
       -- NOTE: `opts = {}` is the same as calling `require('mason').setup({})`
       {
-        'mason-org/mason.nvim',
+        { 'mason-org/mason.nvim', opts = {} },
         opts = {
           registries = {
             'github:mason-org/mason-registry',
@@ -541,6 +541,9 @@ require('lazy').setup({
 
       -- Useful status updates for LSP.
       { 'j-hui/fidget.nvim', opts = {} },
+
+      -- Allows extra capabilities provided by blink.cmp
+      'saghen/blink.cmp',
     },
     config = function()
       -- Brief Aside: **What is LSP?**
