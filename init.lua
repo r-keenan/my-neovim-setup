@@ -924,6 +924,7 @@ require('lazy').setup({
             }
           end,
         },
+        opts = {},
       },
       'folke/lazydev.nvim',
     },
@@ -982,21 +983,13 @@ require('lazy').setup({
       },
 
       completion = {
-        -- Match nvim-cmp behavior: menu,menuone,noinsert
-        menu = {
-          auto_show = true,
-          draw = {
-            treesitter = { 'lsp' },
-          },
-        },
         -- By default, you may press `<c-space>` to show the documentation.
         -- Optionally, set `auto_show = true` to show the documentation after a delay.
         documentation = {
-          auto_show = true,
+          auto_show = false,
           auto_show_delay_ms = 500,
           window = { border = 'rounded' },
         },
-        ghost_text = { enabled = false }, -- Disable ghost text to match nvim-cmp
       },
 
       sources = {
