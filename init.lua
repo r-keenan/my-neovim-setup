@@ -932,11 +932,15 @@ require('lazy').setup({
       },
 
       completion = {
-        -- By default, you may press `<c-space>` to show the documentation.
-        -- Optionally, set `auto_show = true` to show the documentation after a delay.
         documentation = {
-          auto_show = false,
+          auto_show = true,
           auto_show_delay_ms = 500,
+        },
+        draw = {
+          columns = {
+            { 'label', 'label_description', gap = 1 },
+            { 'kind_icon', 'kind' },
+          },
         },
       },
 
