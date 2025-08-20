@@ -3,5 +3,5 @@ return {
   version = '*',
   dependencies = { 'nvim-lua/plenary.nvim' },
   cmd = 'VectorCode',
-  build = 'pipx upgrade vectorcode',
+  build = 'uv tool upgrade vectorcode',
 }
