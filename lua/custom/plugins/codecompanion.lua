@@ -111,6 +111,9 @@ return {
                   api_key = 'cmd:op read op://personal/Grok-API-Key/credential --no-newline',
                 },
                 schema = {
+                  model = {
+                    default = 'grok-4-0709',
+                  },
                   max_completion_tokens = {
                     default = token_limit,
                   },
