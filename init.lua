@@ -1050,7 +1050,8 @@ require('lazy').setup({
   { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
-    main = 'nvim-treesitter.configs',
+    branch = 'master',
+    lazy = false,
     opts = {
       ensure_installed = {
         'bash',
