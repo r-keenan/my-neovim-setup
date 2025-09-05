@@ -72,53 +72,67 @@ return {
           },
         },
         adapters = {
-          anthropic = function()
-            return require('codecompanion.adapters').extend('anthropic', {
-              env = {
-                api_key = 'cmd:op read op://personal/Anthropic/credential --no-newline',
-              },
-              schema = {
-                model = {
-                  default = 'claude-sonnet-4-20250514',
+          http = {
+            anthropic = function()
+              return require('codecompanion.adapters').extend('anthropic', {
+                env = {
+                  api_key = 'cmd:op read op://personal/Anthropic/credential --no-newline',
                 },
-                max_completion_tokens = {
-                  default = token_limit,
+                schema = {
+                  model = {
+                    default = 'claude-sonnet-4-20250514',
+                  },
+                  max_completion_tokens = {
+                    default = token_limit,
+                  },
                 },
-              },
-              system_prompt = sys_prompt,
-            })
-          end,
-          ollama = function()
-            return require('codecompanion.adapters').extend('ollama', {
-              name = 'codellama',
-              env = {
-                url = 'http://localhost:11434',
-              },
-              schema = {
-                model = {
-                  default = 'codellama:latest',
+                system_prompt = sys_prompt,
+              })
+            end,
+            openai = function()
+              return require('codecompanion.adapters').extend('openai', {
+                env = {
+                  api_key = 'cmd:op read op://personal/OpenAI-API-Key/credential --no-newline',
                 },
-              },
-              system_prompt = sys_prompt,
-            })
-          end,
-          openai = function()
-            return require('codecompanion.adapters').extend('openai', {
-              name = 'gpt',
-              env = {
-                api_key = 'cmd:op read op://personal/OpenAI-API-Key/credential --no-newline',
-              },
-              schema = {
-                model = {
-                  default = 'gpt-4',
+                schema = {
+                  model = {
+                    default = 'gpt-4',
+                  },
+                  max_completion_tokens = {
+                    default = token_limit,
+                  },
                 },
-                max_completion_tokens = {
-                  default = token_limit,
+                system_prompt = sys_prompt,
+              })
+            end,
+            xai = function()
+              return require('codecompanion.adapters').extend('xai', {
+                env = {
+                  api_key = 'cmd:op read op://personal/Grok-API-Key/credential --no-newline',
                 },
-              },
-              system_prompt = sys_prompt,
-            })
-          end,
+                schema = {
+                  max_completion_tokens = {
+                    default = token_limit,
+                  },
+                },
+                system_prompt = sys_prompt,
+              })
+            end,
+            ollama = function()
+              return require('codecompanion.adapters').extend('ollama', {
+                name = 'codellama',
+                env = {
+                  url = 'http://localhost:11434',
+                },
+                schema = {
+                  model = {
+                    default = 'codellama:latest',
+                  },
+                },
+                system_prompt = sys_prompt,
+              })
+            end,
+          },
         },
       }
     end
