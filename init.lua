@@ -102,8 +102,16 @@ vim.filetype.add {
   extension = {
     csharp = 'cs',
     csproj = 'xml',
+    svelte = 'svelte',
   },
 }
+
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'svelte',
+  callback = function()
+    vim.treesitter.start()
+  end,
+})
 
 -- Disable inline git blame display
 vim.g.gitblame_display_virtual_text = 0 -- Disables the inline display
@@ -973,28 +981,20 @@ require('lazy').setup({
       signature = { enabled = true },
     },
   },
-  { -- You can easily change to a different colorscheme.
-    -- Change the name of the colorscheme plugin below, and then
-    -- change the command in the config to whatever the name of that colorscheme is
-    --
-    -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`
-    'folke/tokyonight.nvim',
-    priority = 1000, -- Make sure to load this before all the other start plugins.
-    config = function()
-      ---@diagnostic disable-next-line: missing-fields
-      require('tokyonight').setup {
-        styles = {
-          comments = { italic = false }, -- Disable italics in comments
-        },
-      }
-
-      -- Load the colorscheme here.
-      -- Like many other themes, this one has different styles, and you could load
-      -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-      vim.cmd.colorscheme 'tokyonight-night'
+  -- Highlight todo, notes, etc in comments
+  {
+    'maxmx03/solarized.nvim',
+    lazy = false,
+    priority = 1000,
+    ---@type solarized.config
+    opts = {},
+    config = function(_, opts)
+      vim.o.termguicolors = true
+      vim.o.background = 'dark'
+      require('solarized').setup(opts)
+      vim.cmd.colorscheme 'solarized'
     end,
   },
-  -- Highlight todo, notes, etc in comments
   {
     'folke/todo-comments.nvim',
     event = 'VimEnter',
@@ -1070,7 +1070,6 @@ require('lazy').setup({
         'json',
         'python',
         'sql',
-        'svelte',
         'vue',
         'toml',
       },
