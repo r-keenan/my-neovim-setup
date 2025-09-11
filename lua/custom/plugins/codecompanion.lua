@@ -71,6 +71,46 @@ return {
             adapter = current_provider,
           },
         },
+        display = {
+          diff = {
+            enabled = true,
+            provider = mini_diff, -- mini_diff|split|inline
+            close_chat_at = 240, -- Close an open chat buffer if the total columns of your display are less than...
+
+            -- Options for the split diff provider
+            layout = 'vertical', -- vertical|horizontal split
+            opts = {
+              'internal',
+              'filler',
+              'closeoff',
+              'algorithm:histogram', -- https://adamj.eu/tech/2024/01/18/git-improve-diff-histogram/
+              'indent-heuristic', -- https://blog.k-nut.eu/better-git-diffs
+              'followwrap',
+              'linematch:120',
+            },
+
+            diff_signs = {
+              signs = {
+                text = '▌', -- Sign text for normal changes
+                reject = '✗', -- Sign text for rejected changes in super_diff
+                highlight_groups = {
+                  addition = 'DiagnosticOk',
+                  deletion = 'DiagnosticError',
+                  modification = 'DiagnosticWarn',
+                },
+              },
+              -- Super Diff options
+              icons = {
+                accepted = ' ',
+                rejected = ' ',
+              },
+              colors = {
+                accepted = 'DiagnosticOk',
+                rejected = 'DiagnosticError',
+              },
+            },
+          },
+        },
         adapters = {
           http = {
             anthropic = function()
