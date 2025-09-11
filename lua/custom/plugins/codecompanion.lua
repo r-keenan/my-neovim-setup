@@ -74,11 +74,11 @@ return {
         display = {
           diff = {
             enabled = true,
-            provider = mini_diff, -- mini_diff|split|inline
-            close_chat_at = 240, -- Close an open chat buffer if the total columns of your display are less than...
+            provider = mini_diff,
+            close_chat_at = 240,
 
             -- Options for the split diff provider
-            layout = 'vertical', -- vertical|horizontal split
+            layout = 'vertical',
             opts = {
               'internal',
               'filler',
