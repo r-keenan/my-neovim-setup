@@ -31,11 +31,6 @@ return {
     statuscolumn = { enabled = true },
     terminal = { enabled = false },
     words = { enabled = true },
-    styles = {
-      notification = {
-        -- wo = { wrap = true } -- Wrap notifications
-      },
-    },
   },
   keys = function()
     local Snacks = require 'snacks'
