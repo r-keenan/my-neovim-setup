@@ -12,17 +12,22 @@ return {
   config = function()
     -- Create a variable to track the current provider
     local current_provider = 'anthropic' -- Default provider
-    local sys_prompt =
-      [[You are a helpful coding assistant. Always format your code responses using markdown code blocks with explicit language identifiers, like ```python, ```javascript, ```csharp, etc. Be concise while still being thorough. Only give a maximum of three ways to solve a problem.']]
+
+    -- Define multiple system prompts
+    local system_prompts = {
+      programming = [[You are a helpful coding assistant. Always format your code responses using markdown code blocks with explicit language identifiers, like ```python, ```javascript, ```csharp, etc. Be concise while still being thorough. Only give a maximum of three ways to solve a problem.]],
+      generic_knowledge = [[ You are a helpful assistant who answers generalized questions. If you are asked programming questions, or anything adjacent, tell the user to toggle the system prompt]],
+    }
+
+    -- Track current system prompt
+    local current_system_prompt = 'programming'
 
     local token_limit = 10000
 
-    vim.api.nvim_create_autocmd('FileType', {
-      pattern = 'codecompanion',
-      callback = function()
-        vim.treesitter.start(0, 'markdown')
-      end,
-    })
+    -- Function to get current system prompt
+    local function get_current_system_prompt()
+      return system_prompts[current_system_prompt]
+    end
 
     -- Function to get a complete config with the current provider
     local function get_config()
@@ -59,7 +64,7 @@ return {
         strategies = {
           chat = {
             adapter = current_provider,
-            system_prompt = sys_prompt,
+            system_prompt = get_current_system_prompt(),
           },
           inline = {
             adapter = current_provider,
@@ -101,8 +106,8 @@ return {
               },
               -- Super Diff options
               icons = {
-                accepted = ' ',
-                rejected = ' ',
+                accepted = ' ',
+                rejected = ' ',
               },
               colors = {
                 accepted = 'DiagnosticOk',
@@ -126,7 +131,7 @@ return {
                     default = token_limit,
                   },
                 },
-                system_prompt = sys_prompt,
+                system_prompt = get_current_system_prompt(),
               })
             end,
             openai = function()
@@ -142,7 +147,7 @@ return {
                     default = token_limit,
                   },
                 },
-                system_prompt = sys_prompt,
+                system_prompt = get_current_system_prompt(),
               })
             end,
             xai = function()
@@ -158,7 +163,7 @@ return {
                     default = token_limit,
                   },
                 },
-                system_prompt = sys_prompt,
+                system_prompt = get_current_system_prompt(),
               })
             end,
             ollama = function()
@@ -172,13 +177,32 @@ return {
                     default = 'codellama:latest',
                   },
                 },
-                system_prompt = sys_prompt,
+                system_prompt = get_current_system_prompt(),
               })
             end,
           },
         },
       }
     end
+
+    -- Function to switch system prompt
+    local function switch_system_prompt(prompt_name)
+      if system_prompts[prompt_name] then
+        current_system_prompt = prompt_name
+        -- Reconfigure CodeCompanion with new prompt
+        require('codecompanion').setup(get_config())
+        print('CodeCompanion: Switched to "' .. prompt_name .. '" system prompt')
+      else
+        print('CodeCompanion: Unknown system prompt "' .. prompt_name .. '"')
+      end
+    end
+
+    vim.api.nvim_create_autocmd('FileType', {
+      pattern = 'codecompanion',
+      callback = function()
+        vim.treesitter.start(0, 'markdown')
+      end,
+    })
 
     require('codecompanion').setup(get_config())
 
@@ -192,6 +216,15 @@ return {
       '<cmd>CodeCompanionChat Add<cr>',
       { noremap = true, silent = true, desc = 'Add code to CodeCompanionChat window' }
     )
+
+    -- Keybindings for switching system prompts
+    vim.keymap.set('n', '<leader>cp1', function()
+      switch_system_prompt 'programming'
+    end, { noremap = true, silent = true, desc = 'CodeCompanion: Programming prompt' })
+
+    vim.keymap.set('n', '<leader>cp2', function()
+      switch_system_prompt 'generic_knowledge'
+    end, { noremap = true, silent = true, desc = 'CodeCompanion: Generic knowleged prompt' })
 
     -- Expand 'cc' into 'CodeCompanion' in the command line
     vim.cmd [[cab cc CodeCompanion]]
