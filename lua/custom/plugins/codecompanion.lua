@@ -13,25 +13,76 @@ return {
     -- Create a variable to track the current provider
     local current_provider = 'anthropic' -- Default provider
 
-    -- Define multiple system prompts
-    local system_prompts = {
-      programming = [[You are a helpful coding assistant. Always format your code responses using markdown code blocks with explicit language identifiers, like ```python, ```javascript, ```csharp, etc. Be concise while still being thorough. Only give a maximum of three ways to solve a problem.]],
-      generic_knowledge = [[ You are a helpful assistant who answers generalized questions. If you are asked programming questions, or anything adjacent, tell the user to toggle the system prompt]],
-    }
-
-    -- Track current system prompt
-    local current_system_prompt = 'programming'
-
     local token_limit = 10000
-
-    -- Function to get current system prompt
-    local function get_current_system_prompt()
-      return system_prompts[current_system_prompt]
-    end
 
     -- Function to get a complete config with the current provider
     local function get_config()
       return {
+        prompt_library = {
+          ['Programming'] = {
+            strategy = 'chat',
+            description = 'Programming and adjacent questions',
+            opts = {
+              index = 1,
+              is_slash_cmd = true,
+              auto_submit = false,
+              short_name = 'programming',
+            },
+            prompts = {
+              {
+                role = 'user',
+                content = [[You are a helpful coding assistant. Always format your code responses using markdown code blocks with explicit language identifiers, like ```python, ```javascript, ```csharp, etc. Be concise while still being thorough. Only give a maximum of three ways to solve a problem.]],
+              },
+            },
+          },
+          ['GeneralKnowledge'] = {
+            strategy = 'chat',
+            description = 'General, non-programming questions',
+            opts = {
+              index = 2,
+              is_slash_cmd = true,
+              auto_submit = false,
+              short_name = 'gen_knowledge',
+            },
+            prompts = {
+              {
+                role = 'user',
+                content = [[ You are a helpful assistant who answers generalized questions. If you are asked programming questions, or anything adjacent, tell the user to toggle the system prompt]],
+              },
+            },
+          },
+          ['Docusaurus'] = {
+            strategy = 'chat',
+            description = 'Write documentation for me',
+            opts = {
+              index = 3,
+              is_slash_cmd = false,
+              auto_submit = false,
+              short_name = 'docs',
+            },
+            context = {
+              {
+                type = 'file',
+                path = {
+                  'doc/.vitepress/config.mjs',
+                  'lua/codecompanion/config.lua',
+                  'README.md',
+                },
+              },
+            },
+            prompts = {
+              {
+                role = 'user',
+                content = [[I'm rewriting the documentation for my plugin CodeCompanion.nvim, as I'm moving to a vitepress website. Can you help me rewrite it?
+
+I'm sharing my vitepress config file so you have the context of how the documentation website is structured in the `sidebar` section of that file.
+
+I'm also sharing my `config.lua` file which I'm mapping to the `configuration` section of the sidebar.
+]],
+              },
+            },
+          },
+        },
         language_servers = {
           roslyn = true,
         },
@@ -64,7 +115,6 @@ return {
         strategies = {
           chat = {
             adapter = current_provider,
-            system_prompt = get_current_system_prompt(),
           },
           inline = {
             adapter = current_provider,
@@ -131,7 +181,6 @@ return {
                     default = token_limit,
                   },
                 },
-                system_prompt = get_current_system_prompt(),
               })
             end,
             openai = function()
@@ -163,7 +212,6 @@ return {
                     default = token_limit,
                   },
                 },
-                system_prompt = get_current_system_prompt(),
               })
             end,
             ollama = function()
@@ -177,24 +225,11 @@ return {
                     default = 'codellama:latest',
                   },
                 },
-                system_prompt = get_current_system_prompt(),
               })
             end,
           },
         },
       }
-    end
-
-    -- Function to switch system prompt
-    local function switch_system_prompt(prompt_name)
-      if system_prompts[prompt_name] then
-        current_system_prompt = prompt_name
-        -- Reconfigure CodeCompanion with new prompt
-        require('codecompanion').setup(get_config())
-        print('CodeCompanion: Switched to "' .. prompt_name .. '" system prompt')
-      else
-        print('CodeCompanion: Unknown system prompt "' .. prompt_name .. '"')
-      end
     end
 
     vim.api.nvim_create_autocmd('FileType', {
@@ -206,9 +241,7 @@ return {
 
     require('codecompanion').setup(get_config())
 
-    vim.keymap.set('n', '<leader>cb', '<cmd>CodeCompanionActions<cr>', { noremap = true, silent = true, desc = 'CodeCompanionActions' })
     vim.api.nvim_set_keymap('v', '<leader>cb', '<cmd>CodeCompanionActions<cr>', { noremap = true, silent = true, desc = 'CodeCompanionActions' })
-    vim.api.nvim_set_keymap('n', '<leader>cc', '<cmd>CodeCompanionChat Toggle<cr>', { noremap = true, silent = true, desc = 'toggle CodeCompanionChat window' })
     vim.api.nvim_set_keymap('v', '<leader>cc', '<cmd>CodeCompanionChat Toggle<cr>', { noremap = true, silent = true, desc = 'toggle CodeCompanionChat window' })
     vim.api.nvim_set_keymap(
       'v',
@@ -216,15 +249,6 @@ return {
       '<cmd>CodeCompanionChat Add<cr>',
       { noremap = true, silent = true, desc = 'Add code to CodeCompanionChat window' }
     )
-
-    -- Keybindings for switching system prompts
-    vim.keymap.set('n', '<leader>cp1', function()
-      switch_system_prompt 'programming'
-    end, { noremap = true, silent = true, desc = 'CodeCompanion: Programming prompt' })
-
-    vim.keymap.set('n', '<leader>cp2', function()
-      switch_system_prompt 'generic_knowledge'
-    end, { noremap = true, silent = true, desc = 'CodeCompanion: Generic knowleged prompt' })
 
     -- Expand 'cc' into 'CodeCompanion' in the command line
     vim.cmd [[cab cc CodeCompanion]]
