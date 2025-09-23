@@ -2,6 +2,7 @@ return {
   {
     'stevearc/oil.nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
+
     config = function()
       require('oil').setup {
         columns = { 'icon' },
@@ -44,7 +45,12 @@ return {
 
       vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'Open parent directory' })
 
-      vim.keymap.set('n', '<leader>b', require('oil').toggle_float)
+      vim.keymap.set('n', '<leader>bb', require('oil').toggle_float)
+      vim.keymap.set('n', '<leader>bp', function()
+        local current_path = vim.fn.expand '%:h'
+        vim.fn.setreg('+', current_path)
+        vim.notify('Copied directory path to clipboard: ' .. current_path)
+      end, { desc = 'Copy directory path to clipboard' })
     end,
   },
 }
