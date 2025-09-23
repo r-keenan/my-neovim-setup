@@ -7,7 +7,6 @@ return {
     'nvim-telescope/telescope.nvim', -- Optional: For using slash commands
     { 'MeanderingProgrammer/render-markdown.nvim', ft = { 'markdown', 'codecompanion' } }, -- Optional: For prettier markdown rendering
     { 'stevearc/dressing.nvim', opts = {} }, -- Optional: Improves `vim.ui.select`
-    'Davidyz/VectorCode',
   },
   config = function()
     -- Create a variable to track the current provider
@@ -240,7 +239,9 @@ I'm also sharing my `config.lua` file which I'm mapping to the `configuration` s
 
     require('codecompanion').setup(get_config())
 
+    vim.keymap.set('n', '<leader>cb', '<cmd>CodeCompanionActions<cr>', { noremap = true, silent = true, desc = 'CodeCompanionActions' })
     vim.api.nvim_set_keymap('v', '<leader>cb', '<cmd>CodeCompanionActions<cr>', { noremap = true, silent = true, desc = 'CodeCompanionActions' })
+    vim.api.nvim_set_keymap('n', '<leader>cc', '<cmd>CodeCompanionChat Toggle<cr>', { noremap = true, silent = true, desc = 'toggle CodeCompanionChat window' })
     vim.api.nvim_set_keymap('v', '<leader>cc', '<cmd>CodeCompanionChat Toggle<cr>', { noremap = true, silent = true, desc = 'toggle CodeCompanionChat window' })
     vim.api.nvim_set_keymap(
       'v',
