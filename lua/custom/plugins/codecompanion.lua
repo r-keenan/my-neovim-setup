@@ -146,8 +146,8 @@ I'm also sharing my `config.lua` file which I'm mapping to the `configuration` s
 
             diff_signs = {
               signs = {
-                text = '▌', -- Sign text for normal changes
-                reject = '✗', -- Sign text for rejected changes in super_diff
+                text = '▌',
+                reject = '✗',
                 highlight_groups = {
                   addition = 'DiagnosticOk',
                   deletion = 'DiagnosticError',
@@ -196,7 +196,6 @@ I'm also sharing my `config.lua` file which I'm mapping to the `configuration` s
                     default = token_limit,
                   },
                 },
-                system_prompt = get_current_system_prompt(),
               })
             end,
             xai = function()
