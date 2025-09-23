@@ -764,7 +764,6 @@ require('lazy').setup({
         elixirls = {},
         emmet_language_server = {},
         terraformls = {},
-        azure_pipelines_ls = {},
         lua_ls = {
           -- cmd = {...},
           -- filetypes { ...},
