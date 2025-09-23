@@ -42,6 +42,7 @@ return {
               is_slash_cmd = true,
               auto_submit = false,
               short_name = 'gen_knowledge',
+              ignore_system_prompt = true,
             },
             prompts = {
               {
