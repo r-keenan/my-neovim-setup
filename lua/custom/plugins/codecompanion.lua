@@ -29,7 +29,7 @@ return {
             },
             prompts = {
               {
-                role = 'user',
+                role = 'system',
                 content = [[You are a helpful coding assistant. Always format your code responses using markdown code blocks with explicit language identifiers, like ```python, ```javascript, ```csharp, etc. Be concise while still being thorough. Only give a maximum of three ways to solve a problem.]],
               },
             },
@@ -45,7 +45,7 @@ return {
             },
             prompts = {
               {
-                role = 'user',
+                role = 'system',
                 content = [[ You are a helpful assistant who answers generalized questions. If you are asked programming questions, or anything adjacent, tell the user to toggle the system prompt]],
               },
             },
