@@ -45,7 +45,7 @@ return {
 
       vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'Open parent directory' })
 
-      vim.keymap.set('n', '<leader>bb', require('oil').toggle_float)
+      vim.keymap.set('n', '<leader>bb', require('oil').toggle_float, { desc = 'Toggle Oil floating window' })
       vim.keymap.set('n', '<leader>bp', function()
         local current_path = vim.fn.expand '%:h'
         vim.fn.setreg('+', current_path)
