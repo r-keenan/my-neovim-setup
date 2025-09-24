@@ -95,6 +95,14 @@ local function toggle_format_on_save()
   vim.notify('Format on save ' .. status, vim.log.levels.INFO)
 end
 
+vim.api.nvim_create_autocmd('FileType', {
+  desc = 'Remove auto-comment formatoptions',
+  group = vim.api.nvim_create_augroup('no-auto-comment', { clear = true }),
+  callback = function()
+    vim.opt_local.formatoptions:remove { 'c', 'r', 'o' }
+  end,
+})
+
 vim.g.python3_host_prog = 'venv/lib/python3.12/site-packages'
 
 vim.g.have_nerd_font = true
