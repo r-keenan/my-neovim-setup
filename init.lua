@@ -225,9 +225,12 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 -- Toggle formatting off and on
 vim.keymap.set('n', '<leader>tf', toggle_format_on_save, { desc = '[T]oggle [F]ormat on save' })
 
--- Use 'j + j' to exit Insert mode instead of Esc key
 local options = { noremap = true }
 vim.keymap.set('i', 'jj', '<Esc>', options)
+
+-- Disable macro recording and execution
+vim.keymap.set('n', 'q', '<Nop>', { desc = 'Disabled: Macro recording' })
+vim.keymap.set('n', '@', '<Nop>', { desc = 'Disabled: Macro execution' })
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
