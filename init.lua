@@ -222,8 +222,30 @@ vim.diagnostic.config {
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
--- Toggle formatting off and on
 vim.keymap.set('n', '<leader>tf', toggle_format_on_save, { desc = '[T]oggle [F]ormat on save' })
+
+-- Function to reload all LSP clients
+local function reload_lsps()
+  local clients = vim.lsp.get_clients()
+  if #clients == 0 then
+    vim.notify('No LSP clients are currently active', vim.log.levels.INFO)
+    return
+  end
+
+  for _, client in ipairs(clients) do
+    vim.notify('Reloading LSP: ' .. client.name, vim.log.levels.INFO)
+    client.stop { force = true }
+  end
+
+  -- Small delay to ensure clean shutdown before restarting
+  vim.defer_fn(function()
+    vim.cmd 'edit' -- Trigger LSP reattachment
+    vim.notify('All LSPs reloaded', vim.log.levels.INFO)
+  end, 500)
+end
+
+-- Reload all LSP clients
+vim.keymap.set('n', '<leader>rl', reload_lsps, { desc = '[R]eload all [L]SPs' })
 
 local options = { noremap = true }
 vim.keymap.set('i', 'jj', '<Esc>', options)
@@ -646,7 +668,7 @@ require('lazy').setup({
           map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
 
           -- This function resolves a difference between neovim nightly (version 0.11) and stable (version 0.10)
-          ---@param client vim.lsp.Client
+          ---@param client table
           ---@param method vim.lsp.protocol.Method
           ---@param bufnr? integer some lsp support methods only in specific files
           ---@return boolean
