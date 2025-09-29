@@ -175,7 +175,7 @@ I'm also sharing my `config.lua` file which I'm mapping to the `configuration` s
                 },
                 schema = {
                   model = {
-                    default = 'claude-sonnet-4-20250514',
+                    default = 'claude-sonnet-4-5',
                   },
                   max_completion_tokens = {
                     default = token_limit,
