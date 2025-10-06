@@ -23,6 +23,8 @@ What is Kickstart?
 
   Kickstart.nvim is *not* a distribution.
 
+
+  .
   Kickstart.nvim is a starting point for your own configuration.
     The goal is that you can read every line of code, top-to-bottom, understand
     what your configuration is doing, and modify it to suit your needs.
@@ -222,6 +224,16 @@ vim.diagnostic.config {
 
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+vim.keymap.set('n', 'gfp', function()
+  local current_path = vim.fn.expand '%:h'
+  vim.fn.setreg('+', current_path)
+  vim.notify('Copied directory path to clipboard: ' .. current_path)
+end, { desc = 'Copy directory path to clipboard' })
+vim.keymap.set('n', 'gfn', function()
+  local file_name = vim.fn.expand '%:t'
+  vim.fn.setreg('+', file_name)
+  vim.notify('Copied file name to clipboard: ' .. file_name)
+end, { desc = 'Copy file name to clipboard' })
 
 vim.keymap.set('n', '<leader>tf', toggle_format_on_save, { desc = '[T]oggle [F]ormat on save' })
 
