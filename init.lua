@@ -260,6 +260,9 @@ end
 -- Reload all LSP clients
 vim.keymap.set('n', '<leader>rl', reload_lsps, { desc = '[R]eload all [L]SPs' })
 
+-- Reload current buffer
+vim.keymap.set('n', '<leader>rb', '<cmd>edit<CR>', { desc = '[R]eload current [B]uffer' })
+
 local options = { noremap = true }
 vim.keymap.set('i', 'jj', '<Esc>', options)
 
