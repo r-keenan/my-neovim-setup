@@ -24,7 +24,6 @@ return {
     input = { enabled = true },
     notifier = {
       enabled = false,
-      timeout = 3000,
     },
     quickfile = { enabled = false },
     scroll = { enabled = true },
