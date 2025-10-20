@@ -7,6 +7,6 @@ return {
 
     vim.keymap.set('n', '<leader>gf', function()
       gf.open()
-    end)
+    end, { desc = 'Open GrugFar' })
   end,
 }
