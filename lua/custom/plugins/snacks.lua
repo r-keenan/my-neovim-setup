@@ -29,6 +29,10 @@ return {
     quickfile = { enabled = false },
     scroll = { enabled = true },
     statuscolumn = { enabled = true },
+    ---@type table<string, snacks.win.Config>
+    styles = {
+      scratch = { width = 0.5, position = 'right' },
+    },
     terminal = { enabled = false },
     words = { enabled = true },
   },
