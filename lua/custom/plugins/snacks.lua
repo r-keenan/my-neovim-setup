@@ -31,7 +31,7 @@ return {
     statuscolumn = { enabled = true },
     ---@type table<string, snacks.win.Config>
     styles = {
-      scratch = { width = 0.5, position = 'right' },
+      scratch = { width = 0.5, position = 'right', zindex = 0 },
     },
     terminal = { enabled = false },
     words = { enabled = true },
