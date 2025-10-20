@@ -1,5 +1,5 @@
-local imagePath = 'grug.png'
-local cachedImageOutput = nil
+--local imagePath = '../../../'
+--local cachedImageOutput = nil
 
 return {
   'folke/snacks.nvim',
