@@ -123,7 +123,15 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 
--- Disable inline git blame display
+ vim.api.nvim_create_autocmd('FileType', {
+   pattern = 'cs',
+   callback = function()
+     vim.opt_local.tabstop = 4
+     vim.opt_local.shiftwidth = 4
+     vim.opt_local.expandtab = true
+   end,
+ })
+ 
 vim.g.gitblame_display_virtual_text = 0 -- Disables the inline display
 vim.g.gitblame_enabled = 1 -- Keep the plugin enabled for lualine
 
