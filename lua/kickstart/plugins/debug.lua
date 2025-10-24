@@ -72,13 +72,15 @@ return {
       ensure_installed = {
         'delve',
         'netcoredbg',
+        'coreclr',
         'js',
       },
     }
 
+    -- .NET debugger adapter
     dap.adapters.coreclr = {
       type = 'executable',
-      command = vim.fn.exepath 'netcoredbg', -- This finds netcoredbg in PATH
+      command = vim.fn.stdpath 'data' .. '/mason/bin/netcoredbg',
       args = { '--interpreter=vscode' },
     }
 
@@ -146,6 +148,24 @@ return {
     -- Share the same configurations for JavaScript and Svelte
     dap.configurations.javascript = dap.configurations.typescript
     dap.configurations.svelte = dap.configurations.typescript
+
+    -- C#/.NET debug configurations
+    dap.configurations.cs = {
+      {
+        type = 'coreclr',
+        name = 'launch - netcoredbg',
+        request = 'launch',
+        program = function()
+          return vim.fn.input('Path to dll: ', vim.fn.getcwd() .. '/bin/Debug/', 'file')
+        end,
+      },
+      {
+        type = 'coreclr',
+        name = 'attach - netcoredbg',
+        request = 'attach',
+        processId = require('dap.utils').pick_process,
+      },
+    }
 
     -- Dap UI setup
     -- For more information, see |:help nvim-dap-ui|
