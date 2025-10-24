@@ -1,7 +1,5 @@
 return {
-  -- NOTE: Yes, you can install new plugins here!
   'mfussenegger/nvim-dap',
-  -- NOTE: And you can specify dependencies as well
   dependencies = {
     'rcarriga/nvim-dap-ui',
 
@@ -16,6 +14,7 @@ return {
     'leoluz/nvim-dap-go',
     -- C#/.Net
     'NicholasMata/nvim-dap-cs',
+    'mxsdev/nvim-dap-vscode-js',
   },
   keys = {
     -- Basic debugging keymaps, feel free to change to your liking!
@@ -48,7 +47,7 @@ return {
       desc = 'Debug: Step Out',
     },
     {
-      '<leader>B',
+      '<F9>',
       function()
         require('dap').toggle_breakpoint()
       end,
@@ -73,6 +72,7 @@ return {
       ensure_installed = {
         'delve',
         'netcoredbg',
+        'js',
       },
     }
 
@@ -81,6 +81,71 @@ return {
       command = vim.fn.exepath 'netcoredbg', -- This finds netcoredbg in PATH
       args = { '--interpreter=vscode' },
     }
+
+    -- Manual setup for js-debug-adapter (works with Mason installation)
+    dap.adapters['pwa-node'] = {
+      type = 'server',
+      host = 'localhost',
+      port = '${port}',
+      executable = {
+        command = 'js-debug-adapter',
+        args = { '${port}' },
+      },
+    }
+
+    dap.adapters['pwa-chrome'] = {
+      type = 'server',
+      host = 'localhost',
+      port = '${port}',
+      executable = {
+        command = 'js-debug-adapter',
+        args = { '${port}' },
+      },
+    }
+
+    dap.adapters['node'] = {
+      type = 'server',
+      host = 'localhost',
+      port = '${port}',
+      executable = {
+        command = 'js-debug-adapter',
+        args = { '${port}' },
+      },
+    }
+
+    -- SvelteKit debug configurations
+    dap.configurations.typescript = {
+      {
+        type = 'pwa-node',
+        request = 'launch',
+        name = 'Launch SvelteKit Dev Server',
+        runtimeExecutable = 'npm',
+        runtimeArgs = { 'run', 'dev' },
+        rootPath = '${workspaceFolder}',
+        cwd = '${workspaceFolder}',
+        console = 'integratedTerminal',
+        internalConsoleOptions = 'neverOpen',
+      },
+      {
+        type = 'pwa-node',
+        request = 'attach',
+        name = 'Attach to SvelteKit',
+        processId = require('dap.utils').pick_process,
+        cwd = '${workspaceFolder}',
+      },
+      {
+        type = 'pwa-chrome',
+        request = 'launch',
+        name = 'Launch Chrome for SvelteKit',
+        url = 'http://localhost:5173',
+        webRoot = '${workspaceFolder}',
+        sourceMaps = true,
+      },
+    }
+
+    -- Share the same configurations for JavaScript and Svelte
+    dap.configurations.javascript = dap.configurations.typescript
+    dap.configurations.svelte = dap.configurations.typescript
 
     -- Dap UI setup
     -- For more information, see |:help nvim-dap-ui|
