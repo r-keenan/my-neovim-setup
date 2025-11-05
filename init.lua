@@ -123,15 +123,15 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 
- vim.api.nvim_create_autocmd('FileType', {
-   pattern = 'cs',
-   callback = function()
-     vim.opt_local.tabstop = 4
-     vim.opt_local.shiftwidth = 4
-     vim.opt_local.expandtab = true
-   end,
- })
- 
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'cs',
+  callback = function()
+    vim.opt_local.tabstop = 4
+    vim.opt_local.shiftwidth = 4
+    vim.opt_local.expandtab = true
+  end,
+})
+
 vim.g.gitblame_display_virtual_text = 0 -- Disables the inline display
 vim.g.gitblame_enabled = 1 -- Keep the plugin enabled for lualine
 
@@ -1120,6 +1120,7 @@ require('lazy').setup({
         'sql',
         'vue',
         'toml',
+        'go',
       },
       -- Autoinstall languages that are not installed
       auto_install = true,

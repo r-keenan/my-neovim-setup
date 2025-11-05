@@ -106,6 +106,8 @@ I'm also sharing my `config.lua` file which I'm mapping to the `configuration` s
           ['```csharp'] = 'c_sharp',
           ['```cs'] = 'c_sharp',
           ['```c#'] = 'c_sharp',
+          ['```go'] = 'go',
+          ['```golang'] = 'go',
         },
         markdown = {
           code_block_format = {
