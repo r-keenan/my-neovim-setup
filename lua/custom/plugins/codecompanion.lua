@@ -112,6 +112,8 @@ I'm also sharing my `config.lua` file which I'm mapping to the `configuration` s
         markdown = {
           code_block_format = {
             c_sharp = '```csharp\n%s\n```',
+            go = '```go\n%s\n```',
+            golang = '```go\n%s\n```',
           },
         },
         strategies = {
@@ -129,6 +131,16 @@ I'm also sharing my `config.lua` file which I'm mapping to the `configuration` s
           },
         },
         display = {
+          chat = {
+            window = {
+              layout = 'vertical',
+              border = 'single',
+              height = 0.8,
+              width = 0.45,
+            },
+            -- Ensure syntax highlighting is enabled
+            render_headers = true,
+          },
           diff = {
             enabled = true,
             provider = mini_diff,
@@ -235,8 +247,23 @@ I'm also sharing my `config.lua` file which I'm mapping to the `configuration` s
 
     vim.api.nvim_create_autocmd('FileType', {
       pattern = 'codecompanion',
-      callback = function()
-        vim.treesitter.start(0, 'markdown')
+      callback = function(args)
+        local buf = args.buf
+
+        -- Start markdown treesitter
+        vim.treesitter.start(buf, 'markdown')
+
+        -- Enable all injections
+        vim.treesitter.language.register('markdown', 'codecompanion')
+
+        -- Refresh highlighting after a short delay
+        vim.defer_fn(function()
+          if vim.api.nvim_buf_is_valid(buf) then
+            vim.api.nvim_buf_call(buf, function()
+              vim.cmd 'syntax sync fromstart'
+            end)
+          end
+        end, 200)
       end,
     })
 
