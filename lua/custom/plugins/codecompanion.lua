@@ -5,7 +5,20 @@ return {
     'nvim-treesitter/nvim-treesitter',
     'hrsh7th/nvim-cmp', -- Optional: For using slash commands and variables in the chat buffer
     'nvim-telescope/telescope.nvim', -- Optional: For using slash commands
-    { 'MeanderingProgrammer/render-markdown.nvim', ft = { 'markdown', 'codecompanion' } }, -- Optional: For prettier markdown rendering
+    {
+      'MeanderingProgrammer/render-markdown.nvim',
+      ft = { 'markdown', 'codecompanion' },
+      opts = {
+        file_types = { 'markdown', 'codecompanion' },
+        code = {
+          enabled = true,
+          sign = true,
+          style = 'full',
+          position = 'left',
+          width = 'full',
+        },
+      },
+    }, -- Optional: For prettier markdown rendering
     { 'stevearc/dressing.nvim', opts = {} }, -- Optional: Improves `vim.ui.select`
   },
   config = function()
@@ -85,10 +98,12 @@ I'm also sharing my `config.lua` file which I'm mapping to the `configuration` s
         },
         language_servers = {
           roslyn = true,
+          gopls = true,
         },
         filetypes = {
           'cs',
           'csharp',
+          'go',
         },
         language_mapping = {
           ['```lua'] = 'lua',
@@ -253,17 +268,16 @@ I'm also sharing my `config.lua` file which I'm mapping to the `configuration` s
         -- Start markdown treesitter
         vim.treesitter.start(buf, 'markdown')
 
-        -- Enable all injections
-        vim.treesitter.language.register('markdown', 'codecompanion')
-
         -- Refresh highlighting after a short delay
         vim.defer_fn(function()
           if vim.api.nvim_buf_is_valid(buf) then
             vim.api.nvim_buf_call(buf, function()
-              vim.cmd 'syntax sync fromstart'
+              -- Force treesitter to re-parse with injections
+              vim.treesitter.stop(buf)
+              vim.treesitter.start(buf, 'markdown')
             end)
           end
-        end, 200)
+        end, 100)
       end,
     })
 
