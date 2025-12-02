@@ -242,6 +242,21 @@ vim.keymap.set('n', 'gfn', function()
   vim.fn.setreg('+', file_name)
   vim.notify('Copied file name to clipboard: ' .. file_name)
 end, { desc = 'Copy file name to clipboard' })
+vim.keymap.set('n', 'gfw', function()
+  local current_path = vim.fn.expand '%:h'
+  local file_name = vim.fn.expand '%:t'
+  local file_name_with_path = ''
+  local path_table = {}
+  if string.find(current_path, '\\') then
+    path_table = { current_path, '\\', file_name }
+    file_name_with_path = table.concat(path_table, '')
+  elseif string.find(current_path, '/') then
+    path_table = { current_path, '/', file_name }
+    file_name_with_path = table.concat(path_table, '')
+  end
+  vim.fn.setreg('+', file_name_with_path)
+  vim.notify('Copied file name with path to clipboard: ' .. file_name_with_path)
+end, { desc = 'Copy file name with path to clipboard' })
 
 vim.keymap.set('n', '<leader>tf', toggle_format_on_save, { desc = '[T]oggle [F]ormat on save' })
 
