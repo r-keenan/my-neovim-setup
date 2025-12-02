@@ -105,7 +105,7 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 
-vim.g.python3_host_prog = 'venv/lib/python3.12/site-packages'
+vim.g.python3_host_prog = 'venv/lib/python3.14/site-packages'
 
 vim.g.have_nerd_font = true
 vim.filetype.add {
