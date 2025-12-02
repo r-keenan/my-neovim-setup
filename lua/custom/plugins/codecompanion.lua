@@ -261,7 +261,7 @@ I'm also sharing my `config.lua` file which I'm mapping to the `configuration` s
     end
 
     vim.api.nvim_create_autocmd('FileType', {
-      pattern = 'codecompanion',
+      pattern = { 'codecompanion', 'markdown' },
       callback = function(args)
         local buf = args.buf
 
