@@ -873,6 +873,7 @@ require('lazy').setup({
         'lemminx',
         'vimls',
         'taplo',
+        'yamlls',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
