@@ -821,7 +821,7 @@ require('lazy').setup({
         roslyn = {},
         dockerls = {},
         cspell = {
-          config_file = vim.fn.expand '~/.config/nvim/cspell.json',
+          config_file = vim.fn.expand 'cspell.json',
           filetypes = { '*' },
           diagnostics_postprocess = function(diagnostic)
             diagnostic.severity = vim.diagnostic.severity.HINT
