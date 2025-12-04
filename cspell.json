@@ -16,7 +16,11 @@
     "php",
     "rust",
     "svelte",
-    "vue"
+    "vue",
+    "markdown",
+    "lua",
+    "json",
+    "toml"
   ],
   "ignorePaths": ["node_modules", "dist", "build", "bin", "obj", ".git"],
   "words": []
