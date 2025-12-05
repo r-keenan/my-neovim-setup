@@ -829,6 +829,7 @@ require('lazy').setup({
         },
         docker_compose_language_service = {},
         html = {},
+        jsonls = {},
         cssls = {},
         graphql = {},
         prismals = {},
