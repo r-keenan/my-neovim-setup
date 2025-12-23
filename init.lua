@@ -91,6 +91,7 @@ P.S. You can delete this when you're done too. It's your config now! :)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 vim.g.conform_format_on_save_enabled = true
+vim.opt.shadafile = 'NONE'
 local function toggle_format_on_save()
   vim.g.conform_format_on_save_enabled = not vim.g.conform_format_on_save_enabled
   local status = vim.g.conform_format_on_save_enabled and 'enabled' or 'disabled'
