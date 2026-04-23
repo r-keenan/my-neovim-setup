@@ -3,7 +3,6 @@ return {
   dependencies = {
     'nvim-lua/plenary.nvim',
     'nvim-treesitter/nvim-treesitter',
-    'hrsh7th/nvim-cmp', -- Optional: For using slash commands and variables in the chat buffer
     'nvim-telescope/telescope.nvim', -- Optional: For using slash commands
     {
       'MeanderingProgrammer/render-markdown.nvim',
@@ -204,7 +203,7 @@ I'm also sharing my `config.lua` file which I'm mapping to the `configuration` s
                 },
                 schema = {
                   model = {
-                    default = 'claude-sonnet-4-5',
+                    default = 'claude-sonnet-4-6',
                   },
                   max_completion_tokens = {
                     default = token_limit,
