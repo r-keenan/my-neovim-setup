@@ -1,12 +1,5 @@
-return {
-  'MagicDuck/grug-far.nvim',
-  config = function()
-    local gf = require 'grug-far'
+vim.pack.add {'https://github.com/MagicDuck/grug-far.nvim'}
 
-    gf.setup()
+require('grug-far').setup()
 
-    vim.keymap.set('n', '<leader>gf', function()
-      gf.open()
-    end, { desc = 'Open GrugFar' })
-  end,
-}
+vim.keymap.set('n', '<leader>gf', require('grug-far').open, { desc = 'Open GrugFar' })

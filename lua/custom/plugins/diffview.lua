@@ -1,6 +1,4 @@
-return {
-  'sindrets/diffview.nvim',
-  config = function()
-    require('diffview').setup {}
-  end,
-}
+vim.pack.add({'https://github.com/sindrets/diffview.nvim',
+})
+
+require('diffview').setup {}

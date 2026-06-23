@@ -1,6 +1,13 @@
-return {
-  'nvim-lualine/lualine.nvim',
-  dependencies = { 'nvim-tree/nvim-web-devicons', 'dgox16/oldworld.nvim', 'folke/noice.nvim', 'f-person/git-blame.nvim' },
+vim.pack.add({
+
+  'https://github.com/nvim-lualine/lualine.nvim',
+  'https://github.com/nvim-tree/nvim-web-devicons', 
+  'https://github.com/dgox16/oldworld.nvim', 
+  'https://github.com/folke/noice.nvim', 
+  'https://github.com/f-person/git-blame.nvim' 
+})
+
+require('lualine').setup{
   config = function()
     local lualine = require 'lualine'
     local lazy_status = require 'lazy.status' -- to configure lazy pending updates count

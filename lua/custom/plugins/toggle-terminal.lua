@@ -14,13 +14,9 @@ if vim.fn.has 'win32' == 1 then
   end
 end
 
-return {
-  'akinsho/toggleterm.nvim',
-  version = '*',
-  keys = {
-    { '<leader>tt', '<cmd>ToggleTerm size=10 direction=horizontal<cr>', desc = 'Open a horizontal terminal at the Desktop directory' },
-  },
-  config = function()
+vim.pack.add{ 'https://github.com/akinsho/toggleterm.nvim'}
+
+
     require('toggleterm').setup {
       autochdir = true,
       start_in_insert = true,
@@ -28,7 +24,7 @@ return {
       size = 20,
       float_ops = {
         height = 20,
-      },
-    }
-  end,
+      }
 }
+
+vim.keymap.set('n', '<leader>tt', '<cmd>ToggleTerm size=10 direction=horizontal<cr>', { desc = 'Open a horizontal terminal at the Desktop directory' })

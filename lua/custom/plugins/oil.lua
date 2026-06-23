@@ -1,9 +1,5 @@
-return {
-  {
-    'stevearc/oil.nvim',
-    dependencies = { 'nvim-tree/nvim-web-devicons' },
+   vim.pack.add {'https://github.com/stevearc/oil.nvim','https://github.com/nvim-tree/nvim-web-devicons' }
 
-    config = function()
       require('oil').setup {
         columns = { 'icon' },
         keymaps = {
@@ -46,6 +42,3 @@ return {
       vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'Open parent directory' })
 
       vim.keymap.set('n', '<leader>b', require('oil').toggle_float, { desc = 'Toggle Oil floating window' })
-    end,
-  },
-}

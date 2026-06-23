@@ -1,8 +1,3 @@
-return {
-  'kylechui/nvim-surround',
-  version = '^3.0.0',
-  event = 'VeryLazy',
-  config = function()
-    require('nvim-surround').setup {}
-  end,
-}
+vim.pack.add({{src = 'https://github.com/kylechui/nvim-surround', tag = '3.1.0'}})
+
+require('nvim-surround').setup() 

@@ -1,1 +1,4 @@
-return { 'akinsho/git-conflict.nvim', version = '*', config = true }
+vim.pack.add {'https://github.com/akinsho/git-conflict.nvim'}
+
+require('git-conflict').setup()
+

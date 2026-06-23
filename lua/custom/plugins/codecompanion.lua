@@ -1,26 +1,24 @@
-return {
-  'olimorris/codecompanion.nvim',
-  dependencies = {
-    'nvim-lua/plenary.nvim',
-    'nvim-treesitter/nvim-treesitter',
-    'nvim-telescope/telescope.nvim', -- Optional: For using slash commands
-    {
-      'MeanderingProgrammer/render-markdown.nvim',
-      ft = { 'markdown', 'codecompanion' },
-      opts = {
-        file_types = { 'markdown', 'codecompanion' },
-        code = {
-          enabled = true,
-          sign = true,
-          style = 'full',
-          position = 'left',
-          width = 'full',
-        },
-      },
-    }, -- Optional: For prettier markdown rendering
-    { 'stevearc/dressing.nvim', opts = {} }, -- Optional: Improves `vim.ui.select`
-  },
+vim.pack.add({ "https://www.github.com/nvim-lua/plenary.nvim" })
+vim.pack.add({ "https://github.com/nvim-treesitter/nvim-treesitter" })
+vim.pack.add({ {
+  src = "https://www.github.com/olimorris/codecompanion.nvim",
+  version = vim.version.range("^19.0.0")
+} })
+
+  require('codecompanion').setup  {
+    code = {
+      enabled = true,
+      sign = true,
+      style = 'full',
+      position = 'left',
+      border = 'none',
+      conceal_delimiters = false,
+      language = false,
+      background_inset = 0,
+    },
   config = function()
+    vim.treesitter.language.register('markdown', 'codecompanion')
+
     -- Create a variable to track the current provider
     local current_provider = 'anthropic' -- Default provider
 
@@ -259,28 +257,14 @@ I'm also sharing my `config.lua` file which I'm mapping to the `configuration` s
       }
     end
 
-    vim.api.nvim_create_autocmd('FileType', {
-      pattern = { 'codecompanion', 'markdown' },
-      callback = function(args)
-        local buf = args.buf
-
-        -- Start markdown treesitter
-        vim.treesitter.start(buf, 'markdown')
-
-        -- Refresh highlighting after a short delay
-        vim.defer_fn(function()
-          if vim.api.nvim_buf_is_valid(buf) then
-            vim.api.nvim_buf_call(buf, function()
-              -- Force treesitter to re-parse with injections
-              vim.treesitter.stop(buf)
-              vim.treesitter.start(buf, 'markdown')
-            end)
-          end
-        end, 100)
-      end,
-    })
-
     require('codecompanion').setup(get_config())
+
+
+    -- Expand 'cc' into 'CodeCompanion' in the command line
+    vim.cmd [[cab cc CodeCompanion]]
+  end,
+}
+
 
     vim.keymap.set('n', '<leader>cb', '<cmd>CodeCompanionActions<cr>', { noremap = true, silent = true, desc = 'CodeCompanionActions' })
     vim.api.nvim_set_keymap('v', '<leader>cb', '<cmd>CodeCompanionActions<cr>', { noremap = true, silent = true, desc = 'CodeCompanionActions' })
@@ -292,8 +276,3 @@ I'm also sharing my `config.lua` file which I'm mapping to the `configuration` s
       '<cmd>CodeCompanionChat Add<cr>',
       { noremap = true, silent = true, desc = 'Add code to CodeCompanionChat window' }
     )
-
-    -- Expand 'cc' into 'CodeCompanion' in the command line
-    vim.cmd [[cab cc CodeCompanion]]
-  end,
-}
