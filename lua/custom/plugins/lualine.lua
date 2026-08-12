@@ -1,13 +1,13 @@
-vim.pack.add({
+vim.pack.add {
 
   'https://github.com/nvim-lualine/lualine.nvim',
-  'https://github.com/nvim-tree/nvim-web-devicons', 
-  'https://github.com/dgox16/oldworld.nvim', 
-  'https://github.com/folke/noice.nvim', 
-  'https://github.com/f-person/git-blame.nvim' 
-})
+  'https://github.com/nvim-tree/nvim-web-devicons',
+  'https://github.com/dgox16/oldworld.nvim',
+  'https://github.com/folke/noice.nvim',
+  'https://github.com/f-person/git-blame.nvim',
+}
 
-require('lualine').setup{
+require('lualine').setup {
   config = function()
     local lualine = require 'lualine'
     local lazy_status = require 'lazy.status' -- to configure lazy pending updates count
@@ -199,14 +199,12 @@ require('lualine').setup{
       options = {
         icons_enabled = true,
         theme = theme,
-        component_separators = { left = '', right = '' },
-        section_separators = { left = '', right = '' },
         disabled_filetypes = {
           statusline = {},
           winbar = {},
         },
         ignore_focus = {},
-        always_divide_middle = true,
+        always_divide_middle = false,
         globalstatus = true,
       },
 
@@ -216,16 +214,12 @@ require('lualine').setup{
         },
         lualine_b = { branch },
         lualine_c = {
-          space,
           diff,
-          space,
           filename,
           location,
         },
-        lualine_x = {
-          space,
-        },
-        lualine_y = { macro, space },
+        lualine_x = {},
+        lualine_y = { macro },
         lualine_z = {
           git_blame,
           dia,

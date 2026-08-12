@@ -1,5 +1,6 @@
-return {
-  'mistweaverco/kulala.nvim',
+vim.pack.add {'https://github.com/mistweaverco/kulala.nvim'}
+
+require('kulala').setup{
   keys = {
     { '<leader>Rs', desc = 'Send request' },
     { '<leader>Ra', desc = 'Send all requests' },

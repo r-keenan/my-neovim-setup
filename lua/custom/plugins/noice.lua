@@ -1,5 +1,8 @@
-return {
-  'folke/noice.nvim',
+vim.pack.add {'https://github.com/folke/noice.nvim', 
+  'https://github.com/MunifTanjim/nui.nvim'}
+
+require('noice').setup{
+
   event = 'VeryLazy',
   opts = {
     messages = {
@@ -18,8 +21,5 @@ return {
         ['cmp.entry.get_documentation'] = true,
       },
     },
-  },
-  dependencies = {
-    'MunifTanjim/nui.nvim',
   },
 }

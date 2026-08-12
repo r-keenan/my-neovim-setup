@@ -20,7 +20,7 @@ vim.pack.add({ {
     vim.treesitter.language.register('markdown', 'codecompanion')
 
     -- Create a variable to track the current provider
-    local current_provider = 'anthropic' -- Default provider
+    local current_provider = 'ollama' -- Default provider
 
     local token_limit = 10000
 
@@ -201,7 +201,7 @@ I'm also sharing my `config.lua` file which I'm mapping to the `configuration` s
                 },
                 schema = {
                   model = {
-                    default = 'claude-sonnet-4-6',
+                    default = 'claude-sonnet-5',
                   },
                   max_completion_tokens = {
                     default = token_limit,
