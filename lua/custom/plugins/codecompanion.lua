@@ -1,21 +1,21 @@
-vim.pack.add({ "https://www.github.com/nvim-lua/plenary.nvim" })
-vim.pack.add({ "https://github.com/nvim-treesitter/nvim-treesitter" })
-vim.pack.add({ {
-  src = "https://www.github.com/olimorris/codecompanion.nvim",
-  version = vim.version.range("^19.0.0")
-} })
+vim.pack.add { 'https://www.github.com/nvim-lua/plenary.nvim' }
+vim.pack.add { 'https://github.com/nvim-treesitter/nvim-treesitter' }
+vim.pack.add { {
+  src = 'https://www.github.com/olimorris/codecompanion.nvim',
+  version = vim.version.range '^19.0.0',
+} }
 
-  require('codecompanion').setup  {
-    code = {
-      enabled = true,
-      sign = true,
-      style = 'full',
-      position = 'left',
-      border = 'none',
-      conceal_delimiters = false,
-      language = false,
-      background_inset = 0,
-    },
+require('codecompanion').setup {
+  code = {
+    enabled = true,
+    sign = true,
+    style = 'full',
+    position = 'left',
+    border = 'none',
+    conceal_delimiters = false,
+    language = false,
+    background_inset = 0,
+  },
   config = function()
     vim.treesitter.language.register('markdown', 'codecompanion')
 
@@ -224,15 +224,24 @@ I'm also sharing my `config.lua` file which I'm mapping to the `configuration` s
                 },
               })
             end,
+            huggingface = function()
+              return require('codecompanion.adapters').extend('huggingface', {
+                env = {
+                  api_key = 'cmd:op read op://personal/HuggingFace-API-Token/credential --no-newline',
+                },
+                schema = {
+                  max_completion_tokens = {
+                    default = token_limit,
+                  },
+                },
+              })
+            end,
             xai = function()
               return require('codecompanion.adapters').extend('xai', {
                 env = {
                   api_key = 'cmd:op read op://personal/Grok-API-Key/credential --no-newline',
                 },
                 schema = {
-                  model = {
-                    default = 'grok-4-0709',
-                  },
                   max_completion_tokens = {
                     default = token_limit,
                   },
@@ -259,20 +268,13 @@ I'm also sharing my `config.lua` file which I'm mapping to the `configuration` s
 
     require('codecompanion').setup(get_config())
 
-
     -- Expand 'cc' into 'CodeCompanion' in the command line
     vim.cmd [[cab cc CodeCompanion]]
   end,
 }
 
-
-    vim.keymap.set('n', '<leader>cb', '<cmd>CodeCompanionActions<cr>', { noremap = true, silent = true, desc = 'CodeCompanionActions' })
-    vim.api.nvim_set_keymap('v', '<leader>cb', '<cmd>CodeCompanionActions<cr>', { noremap = true, silent = true, desc = 'CodeCompanionActions' })
-    vim.api.nvim_set_keymap('n', '<leader>cc', '<cmd>CodeCompanionChat Toggle<cr>', { noremap = true, silent = true, desc = 'toggle CodeCompanionChat window' })
-    vim.api.nvim_set_keymap('v', '<leader>cc', '<cmd>CodeCompanionChat Toggle<cr>', { noremap = true, silent = true, desc = 'toggle CodeCompanionChat window' })
-    vim.api.nvim_set_keymap(
-      'v',
-      '<leader>ac',
-      '<cmd>CodeCompanionChat Add<cr>',
-      { noremap = true, silent = true, desc = 'Add code to CodeCompanionChat window' }
-    )
+vim.keymap.set('n', '<leader>cb', '<cmd>CodeCompanionActions<cr>', { noremap = true, silent = true, desc = 'CodeCompanionActions' })
+vim.api.nvim_set_keymap('v', '<leader>cb', '<cmd>CodeCompanionActions<cr>', { noremap = true, silent = true, desc = 'CodeCompanionActions' })
+vim.api.nvim_set_keymap('n', '<leader>cc', '<cmd>CodeCompanionChat Toggle<cr>', { noremap = true, silent = true, desc = 'toggle CodeCompanionChat window' })
+vim.api.nvim_set_keymap('v', '<leader>cc', '<cmd>CodeCompanionChat Toggle<cr>', { noremap = true, silent = true, desc = 'toggle CodeCompanionChat window' })
+vim.api.nvim_set_keymap('v', '<leader>ac', '<cmd>CodeCompanionChat Add<cr>', { noremap = true, silent = true, desc = 'Add code to CodeCompanionChat window' })

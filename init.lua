@@ -380,20 +380,6 @@ do
   vim.pack.add { gh 'NMAC427/guess-indent.nvim' }
   require('guess-indent').setup {}
 
-  -- Here is a more advanced configuration example that passes options to `gitsigns.nvim`
-  --
-  -- See `:help gitsigns` to understand what each configuration key does.
-  -- Adds git related signs to the gutter, as well as utilities for managing changes
-  vim.pack.add { gh 'lewis6991/gitsigns.nvim' }
-  require('gitsigns').setup {
-    signs = {
-      add = { text = '+' }, ---@diagnostic disable-line: missing-fields
-      change = { text = '~' }, ---@diagnostic disable-line: missing-fields
-      delete = { text = '_' }, ---@diagnostic disable-line: missing-fields
-      topdelete = { text = '‾' }, ---@diagnostic disable-line: missing-fields
-      changedelete = { text = '~' }, ---@diagnostic disable-line: missing-fields
-    },
-  }
 
   -- Useful plugin to show you pending keybinds.
   vim.pack.add { gh 'folke/which-key.nvim' }
@@ -738,6 +724,7 @@ do
     -- But for many setups, the LSP (`ts_ls`) will work just fine
     -- ts_ls = {},
     gopls = {},
+    markdownlint = {},
     prettier = {}, -- prettier formatter
     prettierd = {},
     eslint_d = {},
@@ -779,7 +766,6 @@ do
     emmet_language_server = {},
     terraformls = {},
     stylua = {}, -- Used to format Lua code
-
     -- Special Lua Config, as recommended by neovim help docs
     lua_ls = {
       on_init = function(client)
@@ -974,14 +960,14 @@ do
     },
 
     sources = {
-      default = { 'lsp', 'path', 'snippets', 'buffer',},
+      default = { 'lsp', 'path', 'snippets', 'buffer' },
       providers = {
-          -- Add max item counts like nvim-cmp
-          lsp = { max_items = 10 },
-          snippets = { max_items = 5 },
-          buffer = { max_items = 5 },
-          path = { max_items = 5 },
-        },
+        -- Add max item counts like nvim-cmp
+        lsp = { max_items = 10 },
+        snippets = { max_items = 5 },
+        buffer = { max_items = 5 },
+        path = { max_items = 5 },
+      },
     },
 
     snippets = { preset = 'luasnip' },
@@ -1085,16 +1071,14 @@ do
   --  Uncomment any of the lines below to enable them (you will need to restart nvim).
   --
   -- require 'kickstart.plugins.debug'
-  -- require 'kickstart.plugins.indent_line'
-  -- require 'kickstart.plugins.lint'
-  -- require 'kickstart.plugins.autopairs'
-  -- require 'kickstart.plugins.neo-tree'
-  -- require 'kickstart.plugins.gitsigns' -- adds gitsigns recommended keymaps
+  require 'kickstart.plugins.indent_line'
+  --require 'kickstart.plugins.lint'
+  require 'kickstart.plugins.gitsigns'
 
   -- NOTE: You can add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --
   --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
-   require 'custom.plugins'
+  require 'custom.plugins'
 end
 
 -- The line beneath this is called `modeline`. See `:help modeline`
