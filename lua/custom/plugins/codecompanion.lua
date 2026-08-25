@@ -20,7 +20,7 @@ require('codecompanion').setup {
     vim.treesitter.language.register('markdown', 'codecompanion')
 
     -- Create a variable to track the current provider
-    local current_provider = 'ollama' -- Default provider
+    local current_provider = 'huggingface' -- Default provider
 
     local token_limit = 10000
 
@@ -30,6 +30,7 @@ require('codecompanion').setup {
         prompt_library = {
           ['Programming'] = {
             strategy = 'chat',
+            adapter = current_provider,
             description = 'Programming and adjacent questions',
             opts = {
               index = 1,
@@ -46,6 +47,7 @@ require('codecompanion').setup {
           },
           ['GeneralKnowledge'] = {
             strategy = 'chat',
+            adapter = current_provider,
             description = 'General, non-programming questions',
             opts = {
               index = 2,
@@ -63,6 +65,7 @@ require('codecompanion').setup {
           },
           ['Docusaurus'] = {
             strategy = 'chat',
+            adapter = current_provider,
             description = 'Write documentation for me',
             opts = {
               index = 3,
@@ -194,54 +197,15 @@ I'm also sharing my `config.lua` file which I'm mapping to the `configuration` s
         },
         adapters = {
           http = {
-            anthropic = function()
-              return require('codecompanion.adapters').extend('anthropic', {
-                env = {
-                  api_key = 'cmd:op read op://personal/Anthropic/credential --no-newline',
-                },
-                schema = {
-                  model = {
-                    default = 'claude-sonnet-5',
-                  },
-                  max_completion_tokens = {
-                    default = token_limit,
-                  },
-                },
-              })
-            end,
-            openai = function()
-              return require('codecompanion.adapters').extend('openai', {
-                env = {
-                  api_key = 'cmd:op read op://personal/OpenAI-API-Key/credential --no-newline',
-                },
-                schema = {
-                  model = {
-                    default = 'gpt-4',
-                  },
-                  max_completion_tokens = {
-                    default = token_limit,
-                  },
-                },
-              })
-            end,
             huggingface = function()
               return require('codecompanion.adapters').extend('huggingface', {
                 env = {
-                  api_key = 'cmd:op read op://personal/HuggingFace-API-Token/credential --no-newline',
+                  api_key = 'cmd:op read op://personal/HuggingFace-API-Token/credential',
                 },
                 schema = {
-                  max_completion_tokens = {
-                    default = token_limit,
+                  model = {
+                    default = 'zai-org/GLM-5.2',
                   },
-                },
-              })
-            end,
-            xai = function()
-              return require('codecompanion.adapters').extend('xai', {
-                env = {
-                  api_key = 'cmd:op read op://personal/Grok-API-Key/credential --no-newline',
-                },
-                schema = {
                   max_completion_tokens = {
                     default = token_limit,
                   },
@@ -257,6 +221,48 @@ I'm also sharing my `config.lua` file which I'm mapping to the `configuration` s
                 schema = {
                   model = {
                     default = 'codellama:latest',
+                  },
+                },
+              })
+            end,
+            anthropic = function()
+              return require('codecompanion.adapters').extend('anthropic', {
+                env = {
+                  api_key = 'cmd:op read op://personal/Anthropic/credential',
+                },
+                schema = {
+                  model = {
+                    default = 'claude-sonnet-5',
+                  },
+                  max_completion_tokens = {
+                    default = token_limit,
+                  },
+                },
+              })
+            end,
+            openai = function()
+              return require('codecompanion.adapters').extend('openai', {
+                env = {
+                  api_key = 'cmd:op read op://personal/OpenAI-API-Key/credential',
+                },
+                schema = {
+                  model = {
+                    default = 'gpt-4',
+                  },
+                  max_completion_tokens = {
+                    default = token_limit,
+                  },
+                },
+              })
+            end,
+            xai = function()
+              return require('codecompanion.adapters').extend('xai', {
+                env = {
+                  api_key = 'cmd:op read op://personal/Grok-API-Key/credential',
+                },
+                schema = {
+                  max_completion_tokens = {
+                    default = token_limit,
                   },
                 },
               })
