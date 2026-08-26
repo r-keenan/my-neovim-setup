@@ -5,37 +5,37 @@ vim.pack.add {
   'https://github.com/folke/snacks.nvim',
 }
 
-require('snacks').setup {
+require('snacks').setup ({
   ---@type snacks.Config
-  opts = {
-    bigfile = { enabled = true },
-    dashboard = {
-      enabled = true,
-      sections = {
-        {
-          { section = 'keys', gap = 1, padding = 1 },
-          { icon = ' ', title = 'Recent Files', section = 'recent_files', indent = 2, padding = 1 },
-          { icon = ' ', title = 'Projects', section = 'projects', indent = 2, padding = 1 },
-          { section = 'startup' },
-        },
+  bigfile = { enabled = true },
+  dashboard = {
+    enabled = true,
+    sections = {
+      {
+        { section = 'keys', gap = 1, padding = 1 },
+        { icon = ' ', title = 'Recent Files', section = 'recent_files', indent = 2, padding = 1 },
+        { icon = ' ', title = 'Projects', section = 'projects', indent = 2, padding = 1 },
+        { section = 'startup' },
       },
     },
-    image = { enabled = false },
-    indent = { enabled = true },
-    input = { enabled = true },
-    notifier = {
-      enabled = false,
-    },
-    quickfile = { enabled = false },
-    scroll = { enabled = true },
-    statuscolumn = { enabled = true },
-    ---@type table<string, snacks.win.Config>
-    styles = {
-      scratch = { width = 0.5, position = 'right', zindex = 0 },
-    },
-    terminal = { enabled = true },
-    words = { enabled = true },
   },
+  image = { enabled = false },
+  indent = { enabled = true },
+  input = { enabled = true },
+  notifier = {
+    enabled = false,
+  },
+  quickfile = { enabled = false },
+  scroll = { enabled = true },
+  statuscolumn = { enabled = true },
+  ---@type table<string, snacks.win.Config>
+  styles = {
+    scratch = { width = 0.5, position = 'right', zindex = 0 },
+  },
+  terminal = { enabled = true },
+  words = { enabled = true },
+})
+--[=[
   keys = {
     {
       '<leader>tt',
@@ -69,7 +69,9 @@ require('snacks').setup {
         }
       end,
     },
-  },
+  }
+
+    })
   init = function()
     vim.api.nvim_create_autocmd('User', {
       callback = function()
@@ -107,7 +109,6 @@ require('snacks').setup {
   end,
 }
 
---[=[
 vim.keymap.set('n', '<leader>.', function()
   Snacks.scratch()
 end, { desc = 'Toggle Scratch Buffer' })

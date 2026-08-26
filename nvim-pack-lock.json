@@ -55,16 +55,12 @@
       "rev": "d28a3f70721c79e3c5f6693057ae929f3d9c0a03",
       "src": "https://github.com/lukas-reineke/indent-blankline.nvim"
     },
-    "kulala.nvim": {
-      "rev": "232a9939919fe9bc88d573bce92de50f2f160c60",
-      "src": "https://github.com/mistweaverco/kulala.nvim"
-    },
     "lualine.nvim": {
       "rev": "221ce6b2d999187044529f49da6554a92f740a96",
       "src": "https://github.com/nvim-lualine/lualine.nvim"
     },
     "mason-lspconfig.nvim": {
-      "rev": "24d4ab0838b250753b307a8747ade06dc99aed9d",
+      "rev": "1b621470c01bd8190bb32a290d21575d3e6470c5",
       "src": "https://github.com/mason-org/mason-lspconfig.nvim"
     },
     "mason-tool-installer.nvim": {
@@ -100,8 +96,9 @@
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-surround": {
-      "rev": "8b47db616ef658b8fc27e61db2896aa2f40134de",
-      "src": "https://github.com/kylechui/nvim-surround"
+      "rev": "2e93e154de9ff326def6480a4358bfc149d5da2c",
+      "src": "https://github.com/kylechui/nvim-surround",
+      "version": "4.0.0 - 5.0.0"
     },
     "nvim-tree.lua": {
       "rev": "b2aadda94b107480c48e548d6db51c6840b7b33c",
@@ -139,25 +136,9 @@
       "rev": "74b06c6c75e4eeb3108ec01852001636d85a932b",
       "src": "https://github.com/nvim-lua/plenary.nvim"
     },
-    "present.nvim": {
-      "rev": "ce22dfaf9ebc2b37eb688e00929dfaeff126fe94",
-      "src": "https://github.com/tjdevries/present.nvim"
-    },
-    "rainbow-delimiters.nvim": {
-      "rev": "012f1480cd9a5fc99fce7678e0a536421a53fc46",
-      "src": "https://github.com/HiPhish/rainbow-delimiters.nvim"
-    },
     "rainbow_csv.nvim": {
       "rev": "26de78d8324f7ac6a3e478319d1eb1f17123eb5b",
       "src": "https://github.com/cameron-wags/rainbow_csv.nvim"
-    },
-    "roslyn.nvim": {
-      "rev": "de9a98d61ed3fd01b5016eea5fe9e32f1a4c7cfb",
-      "src": "https://github.com/seblyng/roslyn.nvim"
-    },
-    "smear-cursor.nvim": {
-      "rev": "9e9378d6ee34bb3782e0e8c63d9ec8ca618b479b",
-      "src": "https://github.com/sphamba/smear-cursor.nvim"
     },
     "snacks.nvim": {
       "rev": "882c996cf28183f4d63640de0b4c02ec886d01f2",

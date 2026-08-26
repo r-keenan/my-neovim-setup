@@ -153,6 +153,7 @@ do
   -- Clear highlights on search when pressing <Esc> in normal mode
   --  See `:help hlsearch`
   vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+  vim.keymap.set('n', '<leader>pu', '<cmd>lua vim.pack.update()<CR>')
 
   vim.keymap.set('n', 'gfp', function()
     local current_path = vim.fn.expand '%:h'
@@ -380,6 +381,16 @@ do
   vim.pack.add { gh 'NMAC427/guess-indent.nvim' }
   require('guess-indent').setup {}
 
+  vim.pack.add { gh 'lewis6991/gitsigns.nvim' }
+  require('gitsigns').setup {
+    signs = {
+      add = { text = '+' }, ---@diagnostic disable-line: missing-fields
+      change = { text = '~' }, ---@diagnostic disable-line: missing-fields
+      delete = { text = '_' }, ---@diagnostic disable-line: missing-fields
+      topdelete = { text = '‾' }, ---@diagnostic disable-line: missing-fields
+      changedelete = { text = '~' }, ---@diagnostic disable-line: missing-fields
+    },
+  }
 
   -- Useful plugin to show you pending keybinds.
   vim.pack.add { gh 'folke/which-key.nvim' }
@@ -809,7 +820,12 @@ do
   }
 
   -- Automatically install LSPs and related tools to stdpath for Neovim
-  require('mason').setup {}
+  require('mason').setup {
+registries = {
+        "github:mason-org/mason-registry",
+        "github:Crashdummyy/mason-registry",
+    },
+  }
 
   -- Translates between nvim-lspconfig server names and mason.nvim package names (e.g. lua_ls <-> lua-language-server)
   require('mason-lspconfig').setup {
@@ -863,21 +879,21 @@ do
     -- You can also specify external formatters in here.
     formatters_by_ft = {
       lua = { 'stylua' },
-      svelte = { 'prettierd', 'prettier' },
-      javascript = { 'prettier' },
-      typescript = { 'prettier' },
-      javascriptreact = { 'prettier' },
-      typescriptreact = { 'prettier' },
-      css = { 'prettier' },
-      html = { 'prettier' },
-      json = { 'prettier' },
-      yaml = { 'prettier' },
+      svelte = { 'prettierd', 'prettier', stop_after_first = true },
+      javascript = { 'prettierd', 'prettier', stop_after_first = true },
+      typescript = { 'prettierd', 'prettier', stop_after_first = true },
+      javascriptreact = { 'prettierd', 'prettier', stop_after_first = true },
+      typescriptreact = { 'prettierd', 'prettier', stop_after_first = true },
+      css = { 'prettierd', 'prettier', stop_after_first = true },
+      html = { 'prettierd', 'prettier', stop_after_first = true },
+      json = { 'prettierd', 'prettier', stop_after_first = true },
+      yaml = { 'prettierd', 'prettier', stop_after_first = true },
       markdown = { 'prettier' },
       graphql = { 'prettier' },
-      python = { 'isort', 'black' },
+      python = { 'isort', 'black', stop_after_first = true },
       go = { 'gofmt' },
       csharp = { 'csharpier' },
-      vue = { 'prettierd', 'prettier' },
+      vue = { 'prettierd', 'prettier', stop_after_first = true },
       toml = { 'taplo' },
       --
       -- rust = { 'rustfmt' },
