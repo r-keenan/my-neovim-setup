@@ -103,6 +103,10 @@
       "rev": "8b47db616ef658b8fc27e61db2896aa2f40134de",
       "src": "https://github.com/kylechui/nvim-surround"
     },
+    "nvim-tree.lua": {
+      "rev": "b2aadda94b107480c48e548d6db51c6840b7b33c",
+      "src": "https://github.com/nvim-tree/nvim-tree.lua"
+    },
     "nvim-treesitter": {
       "rev": "8b98b4470eb326f1c7b50dae79f8c963568e5720",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"
@@ -142,6 +146,10 @@
     "rainbow-delimiters.nvim": {
       "rev": "012f1480cd9a5fc99fce7678e0a536421a53fc46",
       "src": "https://github.com/HiPhish/rainbow-delimiters.nvim"
+    },
+    "rainbow_csv.nvim": {
+      "rev": "26de78d8324f7ac6a3e478319d1eb1f17123eb5b",
+      "src": "https://github.com/cameron-wags/rainbow_csv.nvim"
     },
     "roslyn.nvim": {
       "rev": "de9a98d61ed3fd01b5016eea5fe9e32f1a4c7cfb",

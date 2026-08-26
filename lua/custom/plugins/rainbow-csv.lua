@@ -1,6 +1,7 @@
-return {
-  'cameron-wags/rainbow_csv.nvim',
-  config = true,
+vim.pack.add {'https://github.com/cameron-wags/rainbow_csv.nvim'}
+
+require('rainbow-csv').setup{
+config = true,
   ft = {
     'csv',
     'tsv',

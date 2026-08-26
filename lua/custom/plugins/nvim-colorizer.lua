@@ -1,3 +1,3 @@
-vim.pack.add {'https://github.com/catgoose/nvim-colorizer.lua'}
+vim.pack.add { 'https://github.com/catgoose/nvim-colorizer.lua' }
 
-require('colorizer').setup()
+require('colorizer').setup {}
